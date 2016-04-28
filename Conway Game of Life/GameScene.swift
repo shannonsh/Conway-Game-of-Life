@@ -35,13 +35,16 @@ class GameScene: SKScene {
 //        myLabel.position = CGPoint(x:CGRectGetMidX(self.frame), y:CGRectGetMidY(self.frame));
 //        
 //        self.addChild(myLabel)
-        
-        var numRows = 10
-        var numCols = 10
 //        var world: World(numRows, numCols)
         
         // initialize the 2d array of tiles
-        let spaceBetwCells = 1
+        
+        let numRows = 10
+        let numCols = 5
+        var world = World(width: numCols, height: numRows)
+        
+        
+        
         
         
     }
@@ -64,6 +67,9 @@ class GameScene: SKScene {
 //            
 //            self.addChild(sprite)
 //        }
+        
+        
+        
     }
    
     override func update(currentTime: CFTimeInterval) {

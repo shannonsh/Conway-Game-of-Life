@@ -8,13 +8,13 @@
 
 import Foundation
 
+let DEAD = 0;
+let P1 = 1; // cell is owned by player 1
+let P2 = 2; // cell is owned by player 2
 
 
 class Cell {
     // possible states of the cell
-    let dead = 0;
-    let P1 = 1; // cell is owned by player 1
-    let P2 = 2; // cell is owned by player 2
     
     var x: Int;
     var y: Int;
@@ -27,7 +27,7 @@ class Cell {
     init(x0: Int, y0: Int) {
         x = x0;
         y = y0;
-        state = dead;
+        state = DEAD;
     }
     
 }
