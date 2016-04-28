@@ -18,6 +18,22 @@ class GameScene: SKScene {
     let _numRows = 8
     let _numCols = 10
     let _gridLowerLeftCorner:CGPoint = CGPoint(x: 255, y: 300)
+   
+    required init(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override init(size: CGSize)
+    {
+        super.init(size: size)
+        
+        anchorPoint = CGPoint(x: 0, y: 1.0)
+        
+        let background = SKSpriteNode(imageNamed: "background")
+        background.position = CGPoint(x: 0, y: 0)
+        background.anchorPoint = CGPoint(x: 0, y: 1.0)
+        addChild(background)
+    }
     
     func calculateTileSize()-> CGSize
     {
@@ -51,8 +67,8 @@ class GameScene: SKScene {
             for c in 0..._numCols {
                 let tile = SKSpriteNode(color: UIColor.blueColor(), size: CGSize(width: 50, height: 50))
                 tile.size = CGSize(width: tileSize.width, height: tileSize.height)
-                
-                tile.anchorPoint = CGPoint(x: 0.5, y: 0.5)
+            
+                tile.anchorPoint = CGPoint(x: 0.0, y: 1.0)
                 tile.position = getTilePosition(row: r, column: c)
                 self.addChild(tile)
                 tileRow.append(tile)
