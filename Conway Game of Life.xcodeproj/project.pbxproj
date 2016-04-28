@@ -14,6 +14,7 @@
 		EEA3459D1C938786007EF118 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EEA3459B1C938786007EF118 /* Main.storyboard */; };
 		EEA3459F1C938786007EF118 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EEA3459E1C938786007EF118 /* Assets.xcassets */; };
 		EEA345A21C938786007EF118 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EEA345A01C938786007EF118 /* LaunchScreen.storyboard */; };
+		FBBF39701CD2A306009D1311 /* Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBBF396F1CD2A306009D1311 /* Cell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		EEA3459E1C938786007EF118 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EEA345A11C938786007EF118 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EEA345A31C938786007EF118 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FBBF396F1CD2A306009D1311 /* Cell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +60,7 @@
 		EEA345921C938786007EF118 /* Conway Game of Life */ = {
 			isa = PBXGroup;
 			children = (
+				FBBF396F1CD2A306009D1311 /* Cell.swift */,
 				EEA345931C938786007EF118 /* AppDelegate.swift */,
 				EEA345951C938786007EF118 /* GameScene.sks */,
 				EEA345971C938786007EF118 /* GameScene.swift */,
@@ -143,6 +146,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EEA345981C938786007EF118 /* GameScene.swift in Sources */,
+				FBBF39701CD2A306009D1311 /* Cell.swift in Sources */,
 				EEA3459A1C938786007EF118 /* GameViewController.swift in Sources */,
 				EEA345941C938786007EF118 /* AppDelegate.swift in Sources */,
 			);
