@@ -26,13 +26,8 @@ class GameScene: SKScene {
         addChild(background)
     }
     
-    override func didMoveToView(view: SKView) {
-        let cell = SKSpriteNode(imageNamed: "red block")
-        cell.size = CGSize(width: 10, height: 10)
-        cell.position = CGPointMake(0,0)
-        cell.anchorPoint = CGPoint(x: 0, y: 1.0)
-        addChild(cell)
-        
+    override func didMoveToView(view: SKView)
+    {
 //        /* Setup your scene here */
         
 //        let myLabel = SKLabelNode(fontNamed:"Chalkduster")
@@ -49,7 +44,12 @@ class GameScene: SKScene {
         let numCols = 5
         var world = World(width: numCols, height: numRows)
         
-        
+        let cell = SKSpriteNode(imageNamed: "red block")
+        cell.size = CGSize(width: 10, height: 10)
+        cell.position = CGPointMake(0,0)
+        cell.anchorPoint = CGPoint(x: 0, y: 1.0)
+        addChild(cell)
+
         
         
         
@@ -78,7 +78,10 @@ class GameScene: SKScene {
         
     }
    
-    override func update(currentTime: CFTimeInterval) {
+    override func update(currentTime: CFTimeInterval)
+    {
         /* Called before each frame is rendered */
+        
+        
     }
 }
