@@ -27,11 +27,7 @@ class GameScene: SKScene {
     }
     
     override func didMoveToView(view: SKView) {
-        let cell = SKSpriteNode(imageNamed: "red block")
-        cell.size = CGSize(width: 10, height: 10)
-        cell.position = CGPointMake(0,0)
-        cell.anchorPoint = CGPoint(x: 0, y: 1.0)
-        addChild(cell)
+//        
         
 //        /* Setup your scene here */
         
@@ -80,5 +76,10 @@ class GameScene: SKScene {
    
     override func update(currentTime: CFTimeInterval) {
         /* Called before each frame is rendered */
+        let cell = SKSpriteNode(imageNamed: "red block")
+        cell.size = CGSize(width: 10, height: 10)
+        cell.position = CGPointMake(0,0)
+        cell.anchorPoint = CGPoint(x: 0, y: 1.0)
+        addChild(cell)
     }
 }
