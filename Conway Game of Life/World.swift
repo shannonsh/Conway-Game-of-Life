@@ -44,20 +44,4 @@ class World {
 //            }
 //        }
     }
-    
-    func drawBoard()
-    {
-        let greyBlock = SKSpriteNode(imageNamed: "grey block")
-
-        for row in 0...height-1
-        {
-            for col in 0...width-1
-            {
-                if board[col][row].state == DEAD
-                {
-                    
-                }
-            }
-        }
-    }
 }
