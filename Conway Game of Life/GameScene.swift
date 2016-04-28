@@ -27,6 +27,9 @@ class GameScene: SKScene {
     }
     
     override func didMoveToView(view: SKView) {
+        let cell = SKSpriteNode(imageNamed: "red block")
+        cell.position = CGPointMake(size.width/2, size.height/2 - 100)
+        addChild(cell)
 //        /* Setup your scene here */
         
 //        let myLabel = SKLabelNode(fontNamed:"Chalkduster")

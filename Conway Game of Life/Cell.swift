@@ -16,17 +16,13 @@ let P2 = 2; // cell is owned by player 2
 class Cell {
     // possible states of the cell
     
-    var x: Int;
-    var y: Int;
     var state: Int;
     
     /*
     * x0: initial x location of cell
     * y0: initial y location of cell
     */
-    init(x0: Int, y0: Int) {
-        x = x0;
-        y = y0;
+    init() {
         state = DEAD;
     }
     

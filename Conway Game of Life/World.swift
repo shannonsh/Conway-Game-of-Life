@@ -9,7 +9,7 @@
 import Foundation
 import SpriteKit
 
-class World: SKScene {
+class World {
     var board: [[Cell]];
     
     let width: Int;
@@ -34,13 +34,15 @@ class World: SKScene {
         numP1Cells = 0;
         numP2Cells = 0;
         
-        super.init(size: self.size)
-        
-        for x in 0...width - 1 {
-            for y in 0...height - 1 {
-                board[x][y] = Cell(x0: x, y0: y);
-            }
-        }
+        var arr: [Cell];
+
+        board = Array(count: height, repeatedValue: Array(count: width, repeatedValue: Cell()));
+//        for x in 0...width - 1 {
+//            board.append(arr);
+//            for y in 0...height - 1 {
+//                
+//            }
+//        }
     }
     
     func drawBoard()
