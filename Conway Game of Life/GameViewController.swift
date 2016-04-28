@@ -2,7 +2,7 @@
 //  GameViewController.swift
 //  Conway Game of Life
 //
-//  Created by Elena Ariza on 3/11/16.
+//  Created by Elena Ariza on 3/11/16. hI
 //  Copyright (c) 2016 Elena Ariza. All rights reserved.
 //
 
