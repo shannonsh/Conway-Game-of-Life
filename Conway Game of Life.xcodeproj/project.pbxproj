@@ -7,23 +7,23 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EE63CD1B1CD27A7B00C89529 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EE63CD1A1CD27A7B00C89529 /* Assets.xcassets */; };
 		EEA345941C938786007EF118 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA345931C938786007EF118 /* AppDelegate.swift */; };
 		EEA345961C938786007EF118 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = EEA345951C938786007EF118 /* GameScene.sks */; };
 		EEA345981C938786007EF118 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA345971C938786007EF118 /* GameScene.swift */; };
 		EEA3459A1C938786007EF118 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA345991C938786007EF118 /* GameViewController.swift */; };
 		EEA3459D1C938786007EF118 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EEA3459B1C938786007EF118 /* Main.storyboard */; };
-		EEA3459F1C938786007EF118 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EEA3459E1C938786007EF118 /* Assets.xcassets */; };
 		EEA345A21C938786007EF118 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EEA345A01C938786007EF118 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		EE63CD1A1CD27A7B00C89529 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EEA345901C938786007EF118 /* Conway Game of Life.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Conway Game of Life.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EEA345931C938786007EF118 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EEA345951C938786007EF118 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
 		EEA345971C938786007EF118 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		EEA345991C938786007EF118 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		EEA3459C1C938786007EF118 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		EEA3459E1C938786007EF118 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EEA345A11C938786007EF118 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EEA345A31C938786007EF118 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -63,8 +63,8 @@
 				EEA345971C938786007EF118 /* GameScene.swift */,
 				EEA345991C938786007EF118 /* GameViewController.swift */,
 				EEA3459B1C938786007EF118 /* Main.storyboard */,
-				EEA3459E1C938786007EF118 /* Assets.xcassets */,
 				EEA345A01C938786007EF118 /* LaunchScreen.storyboard */,
+				EE63CD1A1CD27A7B00C89529 /* Assets.xcassets */,
 				EEA345A31C938786007EF118 /* Info.plist */,
 			);
 			path = "Conway Game of Life";
@@ -130,7 +130,7 @@
 			files = (
 				EEA345961C938786007EF118 /* GameScene.sks in Resources */,
 				EEA345A21C938786007EF118 /* LaunchScreen.storyboard in Resources */,
-				EEA3459F1C938786007EF118 /* Assets.xcassets in Resources */,
+				EE63CD1B1CD27A7B00C89529 /* Assets.xcassets in Resources */,
 				EEA3459D1C938786007EF118 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
