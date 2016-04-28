@@ -10,15 +10,6 @@ import SpriteKit
 
 class GameScene: SKScene {
     
-    var _tiles:[[SKSpriteNode]] = []
-    var _margin = 4
-    
-    let _gridWidth = 400
-    let _gridHeight = 300
-    let _numRows = 8
-    let _numCols = 10
-    let _gridLowerLeftCorner:CGPoint = CGPoint(x: 255, y: 300)
-   
     required init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -35,21 +26,6 @@ class GameScene: SKScene {
         addChild(background)
     }
     
-    func calculateTileSize()-> CGSize
-    {
-        let tileWidth = _gridWidth / _numCols - _margin
-        let tileHeight = _gridHeight / _numRows - _margin
-        return CGSize(width: tileWidth, height: tileHeight)
-    }
-    
-    func getTilePosition(row r:Int, column c:Int) -> CGPoint
-    {
-        let tileSize = calculateTileSize()
-        let x = Int(_gridLowerLeftCorner.x) + _margin + (c * (Int(tileSize.width) + _margin))
-        let y = Int(_gridLowerLeftCorner.y) + _margin + (r * (Int(tileSize.height) + _margin))
-        return CGPoint(x: x, y: y)
-    }
-    
     override func didMoveToView(view: SKView) {
 //        /* Setup your scene here */
         
@@ -60,21 +36,13 @@ class GameScene: SKScene {
 //        
 //        self.addChild(myLabel)
         
+        var numRows = 10
+        var numCols = 10
+//        var world: World(numRows, numCols)
+        
         // initialize the 2d array of tiles
-        let tileSize = calculateTileSize()
-        for r in 0..._numRows {
-            var tileRow:[SKSpriteNode] = []
-            for c in 0..._numCols {
-                let tile = SKSpriteNode(color: UIColor.blueColor(), size: CGSize(width: 50, height: 50))
-                tile.size = CGSize(width: tileSize.width, height: tileSize.height)
-            
-                tile.anchorPoint = CGPoint(x: 0.0, y: 1.0)
-                tile.position = getTilePosition(row: r, column: c)
-                self.addChild(tile)
-                tileRow.append(tile)
-            }
-            _tiles.append(tileRow)
-        }
+        let spaceBetwCells = 1
+        
         
     }
     
