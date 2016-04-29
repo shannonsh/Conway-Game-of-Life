@@ -10,6 +10,9 @@ import SpriteKit
 
 class GameScene: SKScene {
     
+    var world: World = World(width: 0, height: 0)
+
+    
     required init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -39,18 +42,10 @@ class GameScene: SKScene {
         
         // initialize the 2d array of tiles
         
-        let numRows = 10
-        let numCols = 5
-        var world = World(width: numCols, height: numRows)
         
-        let cell = SKSpriteNode(imageNamed: "red block")
-        cell.size = CGSize(width: 10, height: 10)
-        cell.position = CGPointMake(0,0)
-        cell.anchorPoint = CGPoint(x: 0, y: 1.0)
-        addChild(cell)
-
-        
-        
+        let numRows = 15
+        let numCols = 10
+        world = World(width: numCols, height: numRows)
         
     }
     
@@ -73,17 +68,49 @@ class GameScene: SKScene {
 //            self.addChild(sprite)
 //        }
         
-        
-        
     }
+    
+    
    
     override func update(currentTime: CFTimeInterval)
     {
         /* Called before each frame is rendered */
-        let cell = SKSpriteNode(imageNamed: "red block")
-        cell.size = CGSize(width: 10, height: 10)
-        cell.position = CGPointMake(0,0)
-        cell.anchorPoint = CGPoint(x: 0, y: 1.0)
-        addChild(cell)
+        let numRows = world.height
+        let numCols = world.width
+        let margin: CGFloat = 20
+        let upperSpace: CGFloat = 100
+        let spaceBetwCells: CGFloat = 1.4
+        
+        let bounds = UIScreen.mainScreen().bounds
+        let widthScreen = bounds.size.width
+        
+        let gridWidth: CGFloat = widthScreen - margin*2
+        let cellSize = (gridWidth - CGFloat(numCols-1)*spaceBetwCells) * 1.0 / CGFloat(numCols)
+        
+        for row in 0...numRows-1 {
+            for col in 0...numCols-1 {
+                let leftCornerCell = margin + CGFloat(col) * (cellSize + spaceBetwCells)
+                let upperCornerCell = upperSpace + CGFloat(row) * (cellSize + spaceBetwCells)
+
+                var cell = SKSpriteNode()
+                if world.board[row][col].state == DEAD {
+                    cell = SKSpriteNode(imageNamed: "grey block")
+                }
+                else if world.board[row][col].state == P1 {
+                    cell = SKSpriteNode(imageNamed: "red block")
+                }
+                cell.size = CGSize(width: cellSize, height: cellSize)
+                cell.position = CGPointMake(leftCornerCell, -upperCornerCell)
+                cell.anchorPoint = CGPoint(x: 0, y: 1.0)
+                addChild(cell)
+                
+            }
+        }
+        
+//        let cell = SKSpriteNode(imageNamed: "red block")
+//        cell.size = CGSize(width: 50, height: 50)
+//        cell.position = CGPointMake(10, -10)
+//        cell.anchorPoint = CGPoint(x: 0, y: 1.0)
+//        addChild(cell)
     }
 }

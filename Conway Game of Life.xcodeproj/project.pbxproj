@@ -66,7 +66,6 @@
 				EEA345951C938786007EF118 /* GameScene.sks */,
 				EEA345971C938786007EF118 /* GameScene.swift */,
 				EEA345991C938786007EF118 /* GameViewController.swift */,
-				FBBF396F1CD2A306009D1311 /* Cell.swift */,
 				EEA3459B1C938786007EF118 /* Main.storyboard */,
 				EEA3459E1C938786007EF118 /* Assets.xcassets */,
 				FBBF396F1CD2A306009D1311 /* Cell.swift */,
