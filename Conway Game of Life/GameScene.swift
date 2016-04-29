@@ -159,6 +159,7 @@ class GameScene: SKScene {
                 cell.anchorPoint = CGPoint(x: 0, y: 1.0)
                 addChild(cell)
                 
+                
             }
         }
     }
