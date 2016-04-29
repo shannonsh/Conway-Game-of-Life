@@ -146,19 +146,18 @@ class GameScene: SKScene {
         if (col >= 0 && row >= 0 &&
             col < world.board[0].count && row < world.board.count)
         {
-<<<<<<< HEAD
+            
             world.board[row][col].state = P1
 //            gridNodes[row][col].removeFromParent()
 
             gridNodes[row][col] = redBlock
-=======
             if(world.board[row][col].state == P1) {
                 world.board[row][col].state = DEAD
             }
             else {
                 world.board[row][col].state = P1
             }
->>>>>>> origin/master
+            
         }
         
     }
