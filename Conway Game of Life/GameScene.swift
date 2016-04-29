@@ -117,7 +117,12 @@ class GameScene: SKScene {
         if (col >= 0 && row >= 0 &&
             col < world.board[0].count && row < world.board.count)
         {
-            world.board[row][col].state = P1
+            if(world.board[row][col].state == P1) {
+                world.board[row][col].state = DEAD
+            }
+            else {
+                world.board[row][col].state = P1
+            }
         }
         
         
