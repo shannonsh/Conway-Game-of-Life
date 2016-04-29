@@ -43,4 +43,19 @@ class World {
 //            }
 //        }
     }
+    
+    func changeState(locationX: Int, locationY: Int, newState: Int) {
+        board[locationX][locationY].state = newState
+    }
+    
+    func countNeighbors(x: Int, y: Int) {
+        var count = (0,0);
+        if(board[x-1][y-1].state == 1) {
+            count.0 += 1
+        }
+        else if(board[x][y].state == 2) {
+            count.1 += 1
+        }
+        
+    }
 }

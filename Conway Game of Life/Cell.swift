@@ -12,6 +12,8 @@ let DEAD = 0;
 let P1 = 1; // cell is owned by player 1
 let P2 = 2; // cell is owned by player 2
 
+
+
 struct Cell {
     // possible states of the cell
     
