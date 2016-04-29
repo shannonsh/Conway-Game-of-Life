@@ -26,11 +26,11 @@ class World {
     /*
     * Creates an array of dead cells
     */
-    init (width: Int, height: Int)
+    init (widthIn: Int, heightIn: Int)
     {
-        self.board = [[Cell]]()
-        self.width = width;
-        self.height = height;
+        board = [[Cell]]()
+        width = widthIn;
+        height = heightIn;
         numP1Cells = 0;
         numP2Cells = 0;
         

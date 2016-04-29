@@ -10,8 +10,8 @@ import SpriteKit
 
 class GameScene: SKScene {
     
-    var world: World = World(width: 0, height: 0)
-
+    var world: World = World(widthIn: 0, heightIn: 0)
+    var gridCoord = [[CGPointMake(0,0)]]
     
     required init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -45,16 +45,40 @@ class GameScene: SKScene {
         
         let numRows = 15
         let numCols = 10
-        world = World(width: numCols, height: numRows)
-        
+        world = World(widthIn: numCols, heightIn: numRows)
+        gridCoord = Array(count: numRows, repeatedValue: Array(count: numCols, repeatedValue: CGPointMake(0,0)))
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
        /* Called when a touch begins */
         
-//        for touch in touches {
-//            let location = touch.locationInNode(self)
-//            
+        var currentRow = 0
+        var currentCol = 0
+        print("size: \(touches.count)")
+        for touch in touches {
+
+            print("touched")
+            let location = touch.locationInNode(self)
+            
+            currentRow = 0
+            
+            while currentRow < gridCoord.count &&
+                gridCoord[currentRow][0].y > location.y
+            {
+                currentRow += 1
+            }
+            currentRow -= 1
+
+            currentCol = 0
+            print("location x: \(location.x)")
+            while currentCol < gridCoord[0].count &&
+                gridCoord[0][currentCol].x < location.x
+            {
+                currentCol += 1
+            }
+            currentCol -= 1
+            
+
 //            let sprite = SKSpriteNode(imageNamed:"Spaceship")
 //            
 //            sprite.xScale = 0.5
@@ -66,7 +90,19 @@ class GameScene: SKScene {
 //            sprite.runAction(SKAction.repeatActionForever(action))
 //            
 //            self.addChild(sprite)
-//        }
+            
+        }
+        
+        print("currentRow: \(currentRow)")
+        print("currentCol: \(currentCol)")
+
+        if (currentCol > -1 && currentRow > -1)
+        {
+            world.board[currentRow][currentCol].state = P1
+            print("changed state")
+            print("bottom cell \(world.board[currentRow + 1][currentCol].state)")
+        }
+
         
     }
     
@@ -87,11 +123,15 @@ class GameScene: SKScene {
         let gridWidth: CGFloat = widthScreen - margin*2
         let cellSize = (gridWidth - CGFloat(numCols-1)*spaceBetwCells) * 1.0 / CGFloat(numCols)
         
+        
         for row in 0...numRows-1 {
             for col in 0...numCols-1 {
                 let leftCornerCell = margin + CGFloat(col) * (cellSize + spaceBetwCells)
                 let upperCornerCell = upperSpace + CGFloat(row) * (cellSize + spaceBetwCells)
-
+//                print(row)
+//                print(col)
+                gridCoord[row][col] = CGPointMake(leftCornerCell, -upperCornerCell)
+                
                 var cell = SKSpriteNode()
                 if world.board[row][col].state == DEAD {
                     cell = SKSpriteNode(imageNamed: "grey block")
@@ -106,11 +146,5 @@ class GameScene: SKScene {
                 
             }
         }
-        
-//        let cell = SKSpriteNode(imageNamed: "red block")
-//        cell.size = CGSize(width: 50, height: 50)
-//        cell.position = CGPointMake(10, -10)
-//        cell.anchorPoint = CGPoint(x: 0, y: 1.0)
-//        addChild(cell)
     }
 }
