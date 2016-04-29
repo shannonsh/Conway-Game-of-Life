@@ -71,11 +71,23 @@ class GameScene: SKScene {
 //                currentRow += 1
 //            }
             print("location.x: \(location.x)")
-            col = Int((location.x - margin) / (cellSize + spaceBetwCells))
-            row = Int((abs(location.y) - upperSpace) / (cellSize + spaceBetwCells))
+            if (location.x - margin) / (cellSize + spaceBetwCells) < 0
+            {
+                col = -1
+            }
+            else {
+                col = Int((location.x - margin) / (cellSize + spaceBetwCells))
+            }
+            
+            if (abs(location.y) - upperSpace) / (cellSize + spaceBetwCells) < 0
+            {
+                row = -1
+            }
+            else {
+                row = Int((abs(location.y) - upperSpace) / (cellSize + spaceBetwCells))
+            }
             
             print("col: \(col)")
-            print("difference: ")
 //            currentRow -= 1
 //
 //            currentCol = 0
