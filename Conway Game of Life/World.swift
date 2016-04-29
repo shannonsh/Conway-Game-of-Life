@@ -34,7 +34,6 @@ class World {
         numP1Cells = 0;
         numP2Cells = 0;
         
-        var arr: [Cell];
 
         board = Array(count: height, repeatedValue: Array(count: width, repeatedValue: Cell()));
 //        for x in 0...width - 1 {

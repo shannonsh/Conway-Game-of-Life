@@ -13,6 +13,11 @@ class GameScene: SKScene {
     var world: World = World(widthIn: 0, heightIn: 0)
     var gridCoord = [[CGPointMake(0,0)]]
     
+    let margin: CGFloat = 20
+    let upperSpace: CGFloat = 100
+    let spaceBetwCells: CGFloat = 1.4
+    var cellSize: CGFloat = 0
+    
     required init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -52,31 +57,35 @@ class GameScene: SKScene {
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
        /* Called when a touch begins */
         
-        var currentRow = 0
-        var currentCol = 0
         print("size: \(touches.count)")
+        var col = 0
+        var row = 0
         for touch in touches {
 
             print("touched")
             let location = touch.locationInNode(self)
             
-            currentRow = 0
+//            while currentRow < gridCoord.count &&
+//                gridCoord[currentRow][0].y > location.y
+//            {
+//                currentRow += 1
+//            }
+            print("location.x: \(location.x)")
+            col = Int((location.x - margin) / (cellSize + spaceBetwCells))
+            row = Int((abs(location.y) - upperSpace) / (cellSize + spaceBetwCells))
             
-            while currentRow < gridCoord.count &&
-                gridCoord[currentRow][0].y > location.y
-            {
-                currentRow += 1
-            }
-            currentRow -= 1
-
-            currentCol = 0
-            print("location x: \(location.x)")
-            while currentCol < gridCoord[0].count &&
-                gridCoord[0][currentCol].x < location.x
-            {
-                currentCol += 1
-            }
-            currentCol -= 1
+            print("col: \(col)")
+            print("difference: ")
+//            currentRow -= 1
+//
+//            currentCol = 0
+//            print("location x: \(location.x)")
+//            while currentCol < gridCoord[0].count &&
+//                gridCoord[0][currentCol].x < location.x
+//            {
+//                currentCol += 1
+//            }
+//            currentCol -= 1
             
 
 //            let sprite = SKSpriteNode(imageNamed:"Spaceship")
@@ -92,17 +101,14 @@ class GameScene: SKScene {
 //            self.addChild(sprite)
             
         }
-        
-        print("currentRow: \(currentRow)")
-        print("currentCol: \(currentCol)")
 
-        if (currentCol > -1 && currentRow > -1)
+        if (col >= 0 && row >= 0 &&
+            col < world.board[0].count && row < world.board.count)
         {
-            world.board[currentRow][currentCol].state = P1
-            print("changed state")
-            print("bottom cell \(world.board[currentRow + 1][currentCol].state)")
+            world.board[row][col].state = P1
         }
-
+        
+        
         
     }
     
@@ -113,15 +119,12 @@ class GameScene: SKScene {
         /* Called before each frame is rendered */
         let numRows = world.height
         let numCols = world.width
-        let margin: CGFloat = 20
-        let upperSpace: CGFloat = 100
-        let spaceBetwCells: CGFloat = 1.4
         
         let bounds = UIScreen.mainScreen().bounds
         let widthScreen = bounds.size.width
         
         let gridWidth: CGFloat = widthScreen - margin*2
-        let cellSize = (gridWidth - CGFloat(numCols-1)*spaceBetwCells) * 1.0 / CGFloat(numCols)
+        cellSize = (gridWidth - CGFloat(numCols-1)*spaceBetwCells) * 1.0 / CGFloat(numCols)
         
         
         for row in 0...numRows-1 {
