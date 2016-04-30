@@ -6,23 +6,22 @@
 //  Copyright © 2016 Elena Ariza. All rights reserved.
 //
 
-import Foundation
 import SpriteKit
 
 class World {
     var board: [[Cell]];
-    
+ 
     let width: Int;
     let height: Int;
-    
+ 
     var numP1Cells: Int;
     var numP2Cells: Int;
-    
+ 
     required init?(coder aDecoder: NSCoder)
     {
         fatalError("init(coder:) has not been implemented")
     }
-    
+ 
     /*
     * Creates an array of dead cells
     */
@@ -48,14 +47,27 @@ class World {
         board[locationX][locationY].state = newState
     }
     
+    /* 
+    * Counts number of cells owned by player 1 and 2 and returns result as a tuple
+    */
     func countNeighbors(x: Int, y: Int) {
-        var count = (0,0);
-        if(board[x-1][y-1].state == 1) {
-            count.0 += 1
-        }
-        else if(board[x][y].state == 2) {
-            count.1 += 1
-        }
         
+//        var count = (0,0);
+//        if(board[x-1][y-1] != 0) { // check upper left cell
+//            // if cell state is 1, increase P1's count, else increase P2's count
+////            board[x-1][y-1] == 1 ? count.0 + 1 : count.1 + 1
+//            
+//        }
+////        if(board[x-1][y] != 0) { // check left cell
+////            count = board[x-1][y] == 1 ? count.0 + 1 : count.1 + 1
+////        }
+////        if(board[x-1][y+1] != 0) { // check lower left cell
+////            count = board[x-1][y+1] == 1 ? count.0 + 1 : count.1 + 1
+////        }
+////        if(board[x+1][y-1] != 0) { // check upper right cell
+////            count = board[x-1][y+1] == 1 ? count.0 + 1 : count.1 + 1
+////        }
+//        print(count)
+
     }
 }
