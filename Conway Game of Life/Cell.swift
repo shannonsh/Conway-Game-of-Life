@@ -35,19 +35,14 @@ struct Cell {
     * positionY: y location of cell on screen
     * cellSize: width and height of (square) cell
     */
-//    init(positionX: CGFloat, positionY: CGFloat, cellSize: CGFloat) {
+//    init(row: CGFloat, col: CGFloat, cellSize: CGFloat) {
 //        state = DEAD;
-//        sprite = SKSpriteNode(imageNamed: "grey block")
+//        sprite = SKSpriteNode(imageNamed: "dead")
 //        sprite.size = CGSize(width: cellSize, height: cellSize)
-//        sprite.position = CGPointMake(positionX, positionY)
+//        sprite.position = CGPointMake(row, col)
 //        sprite.anchorPoint = CGPoint(x: 0, y: 1.0)
 //    } 
     
-    
-    mutating func die() {
-        state = DEAD;
-        sprite = SKSpriteNode(imageNamed: "dead")
-    }
     
     mutating func updateState(newState: Int) {
         state = newState;
@@ -56,6 +51,12 @@ struct Cell {
         }
         else if(state == 1) {
             sprite = SKSpriteNode(imageNamed: "player 1")
+        }
+        else if(state == 2) {
+            sprite = SKSpriteNode(imageNamed: "player 2")
+        }
+        else {
+            print("ERROR: invalid state for Cell.swift > updateState() function")
         }
     }
  
