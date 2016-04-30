@@ -19,6 +19,9 @@ class GameScene: SKScene {
     let spaceBetwCells: CGFloat = 1.4
     var cellSize: CGFloat = 0
     
+    let greyBlock = SKSpriteNode(imageNamed: "grey block")
+    let redBlock = SKSpriteNode(imageNamed: "red block")
+    
     required init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
