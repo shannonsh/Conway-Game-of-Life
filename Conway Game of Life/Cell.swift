@@ -6,13 +6,13 @@
 //  Copyright © 2016 Elena Ariza. All rights reserved.
 //
 
-import Foundation
+import SpriteKit
 
 let DEAD = 0;
 let P1 = 1; // cell is owned by player 1
 let P2 = 2; // cell is owned by player 2
 
-
+var sprite: SKSpriteNode?
 
 struct Cell {
     // possible states of the cell
