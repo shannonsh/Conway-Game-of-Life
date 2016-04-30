@@ -2,9 +2,8 @@
 //  GameViewController.swift
 //  Conway Game of Life
 //
-//  Created by Elena Ariza on 3/11/16. hi
-// test test through XCODe
-//  Copyright (c) 2016 Elena Ariza. All rights reserved.
+//  Created by Elena Ariza on 3/11/16.
+//  Copyright (c) 2016 Elena Ariza and Shannon Shih. All rights reserved.
 //
 
 import UIKit

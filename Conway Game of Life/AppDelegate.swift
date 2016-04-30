@@ -3,7 +3,7 @@
 //  Conway Game of Life
 //
 //  Created by Elena Ariza on 3/11/16.
-//  Copyright © 2016 Elena Ariza. All rights reserved.
+//  Copyright © 2016 Elena Ariza and Shannon Shih. All rights reserved.
 //
 
 import UIKit
