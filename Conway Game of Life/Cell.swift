@@ -25,7 +25,7 @@ struct Cell {
     */
     init() {
         state = DEAD;
-        sprite = SKSpriteNode(imageNamed: "grey block")
+        sprite = SKSpriteNode(imageNamed: "dead")
     }
     
     /* updated init that incorporates SKSpriteNode */
@@ -42,6 +42,21 @@ struct Cell {
 //        sprite.position = CGPointMake(positionX, positionY)
 //        sprite.anchorPoint = CGPoint(x: 0, y: 1.0)
 //    } 
- 
+    
+    
+    mutating func die() {
+        state = DEAD;
+        sprite = SKSpriteNode(imageNamed: "dead")
+    }
+    
+    mutating func updateState(newState: Int) {
+        state = newState;
+        if(state == 0) {
+            sprite = SKSpriteNode(imageNamed: "dead")
+        }
+        else if(state == 1) {
+            sprite = SKSpriteNode(imageNamed: "player 1")
+        }
+    }
  
 }

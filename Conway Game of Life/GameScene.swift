@@ -68,10 +68,10 @@ class GameScene: SKScene {
                 
                 var cell = SKSpriteNode()
                 if world.board[row][col].state == DEAD {
-                    cell = SKSpriteNode(imageNamed: "grey block")
+                    cell = SKSpriteNode(imageNamed: "dead")
                 }
                 else if world.board[row][col].state == P1 {
-                    cell = SKSpriteNode(imageNamed: "red block")
+                    cell = SKSpriteNode(imageNamed: "player 1")
                 }
                 cell.size = CGSize(width: cellSize, height: cellSize)
                 cell.position = CGPointMake(leftCornerCell, -upperCornerCell)

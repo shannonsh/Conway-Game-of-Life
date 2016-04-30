@@ -43,31 +43,58 @@ class World {
 //        }
     }
     
+    func nextGeneration() {
+        for row in 0...width-1 {
+            for col in 0...height-1 {
+                var theCell: Cell = board[row][col]
+                var neighbors = countNeighbors(row, y: col)
+                
+                if(neighbors.0 + neighbors.1 < 2) {
+                    
+                }
+            }
+        }
+    }
+    
     func changeState(locationX: Int, locationY: Int, newState: Int) {
         board[locationX][locationY].state = newState
     }
     
     /* 
-    * Counts number of cells owned by player 1 and 2 and returns result as a tuple
+    * Counts number of cells owned by player 1 and 2 that are neighboring
+    * a certain cell and returns result as a tuple
+    * x: x coordinate of the cell
+    * y: y coordinate of the cell
     */
-    func countNeighbors(x: Int, y: Int) {
+    func countNeighbors(x: Int, y: Int) -> (Int, Int) {
+        var count = (0,0);
         
-//        var count = (0,0);
-//        if(board[x-1][y-1] != 0) { // check upper left cell
-//            // if cell state is 1, increase P1's count, else increase P2's count
-////            board[x-1][y-1] == 1 ? count.0 + 1 : count.1 + 1
-//            
-//        }
-////        if(board[x-1][y] != 0) { // check left cell
-////            count = board[x-1][y] == 1 ? count.0 + 1 : count.1 + 1
-////        }
-////        if(board[x-1][y+1] != 0) { // check lower left cell
-////            count = board[x-1][y+1] == 1 ? count.0 + 1 : count.1 + 1
-////        }
-////        if(board[x+1][y-1] != 0) { // check upper right cell
-////            count = board[x-1][y+1] == 1 ? count.0 + 1 : count.1 + 1
-////        }
-//        print(count)
-
+        if(board[x+1][y].state == 1) {count.0 += 1} // check upper right cell
+        else if(board[x+1][y].state == 2) {count.1 += 1}
+        
+        if(board[x+1][y].state == 1) {count.0 += 1} // check right cell
+        else if(board[x+1][y].state == 2) {count.1 += 1}
+        
+        if(board[x+1][y-1].state == 1) {count.0 += 1} // check lower right cell
+        else if(board[x+1][y-1].state == 2) {count.1 += 1}
+        
+        if(board[x][y-1].state == 1) {count.0 += 1} // check bottom cell
+        else if(board[x][y-1].state == 2) {count.1 += 1}
+        
+        if(board[x-1][y+1].state == 1) {count.0 += 1} // check lower left cell
+        else if(board[x-1][y+1].state == 2) {count.1 += 1}
+        
+        if(board[x-1][y].state == 1) {count.0 += 1} // check left cell
+        else if(board[x-1][y].state == 2) {count.1 += 1}
+        
+        if(board[x-1][y-1].state == 1) {count.0 += 1} // check upper left cell
+        else if(board[x-1][y-1].state == 2) {count.1 += 1}
+        
+        if(board[x][y-1].state == 1) {count.0 += 1} // check bottom cell
+        else if(board[x][y-1].state == 2) {count.1 += 1}
+        
+        print(count)
+        
+        return count
     }
 }
