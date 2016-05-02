@@ -12,20 +12,21 @@ let DEAD = 0;
 let P1 = 1; // cell is owned by player 1
 let P2 = 2; // cell is owned by player 2
 
-
-
 struct Cell {
     // possible states of the cell
     
+    var xCoord: Int;
+    var yCoord: Int;
     var state: Int;
-    var sprite: SKSpriteNode
+    var sprite: SKSpriteNode!
     /*
     * x0: initial x location of cell
     * y0: initial y location of cell
     */
-    init() {
+    init(xIn: Int, yIn: Int) {
+        xCoord = xIn;
+        yCoord = yIn;
         state = DEAD;
-        sprite = SKSpriteNode(imageNamed: "dead")
     }
     
     /* updated init that incorporates SKSpriteNode */

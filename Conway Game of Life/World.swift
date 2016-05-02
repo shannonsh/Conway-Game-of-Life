@@ -27,14 +27,14 @@ class World {
     */
     init (widthIn: Int, heightIn: Int)
     {
-        board = [[Cell]]()
         width = widthIn;
         height = heightIn;
         numP1Cells = 0;
         numP2Cells = 0;
         
+        board = Array(count: height, repeatedValue: Array(count: width, repeatedValue: Cell(xIn: 0, yIn: 0)));
 
-        board = Array(count: height, repeatedValue: Array(count: width, repeatedValue: Cell()));
+        
 //        for x in 0...width - 1 {
 //            board.append(arr);
 //            for y in 0...height - 1 {
