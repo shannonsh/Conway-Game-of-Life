@@ -30,7 +30,6 @@ struct Cell {
     }
     
     /* updated init that incorporates SKSpriteNode */
-    
     /*
     * positionX: x location of cell on screen
     * positionY: y location of cell on screen

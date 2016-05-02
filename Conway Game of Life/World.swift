@@ -32,7 +32,7 @@ class World {
         numP1Cells = 0;
         numP2Cells = 0;
         
-        board = Array(count: height, repeatedValue: Array(count: width, repeatedValue: Cell(xIn: 0, yIn: 0)));
+        board = Array(count: width, repeatedValue: Array(count: height, repeatedValue: Cell(xIn: 0, yIn: 0)));
 
         
 //        for x in 0...width - 1 {
@@ -41,6 +41,31 @@ class World {
 //                
 //            }
 //        }
+    }
+    
+    /*
+    * For debugging purposes only: prints out entire board in ascii
+    * _ = dead cell, 1 = player 1 cell, 2 = player 2 cell
+    */
+    func printBoard() {
+        for row in 0...width-1 {
+            var rowText = ""
+            for col in 0...height-1{
+                let theCell = board[row][col]
+                
+                if(theCell.state == DEAD) {
+                    rowText += "_"
+                }
+                else if(theCell.state == P1) {
+                    rowText += "1"
+                }
+                else if(theCell.state == P2) {
+                    rowText += "2"
+                }
+            }
+            print(rowText)
+        }
+        print("********************")
     }
     
     
@@ -92,29 +117,19 @@ class World {
     func countNeighbors(x: Int, y: Int) -> (Int, Int) {
         var count = (0,0);
         
-        if(board[x+1][y].state == 1) {count.0 += 1} // check upper right cell
-        else if(board[x+1][y].state == 2) {count.1 += 1}
+        // subtract center cell from total count
+        if(board[x][y].state == 1) {count.0 -= 1}
+        else if(board[x][y].state == 2) {count.1 -= 1}
         
-        if(board[x+1][y].state == 1) {count.0 += 1} // check right cell
-        else if(board[x+1][y].state == 2) {count.1 += 1}
-        
-        if(board[x+1][y-1].state == 1) {count.0 += 1} // check lower right cell
-        else if(board[x+1][y-1].state == 2) {count.1 += 1}
-        
-        if(board[x][y-1].state == 1) {count.0 += 1} // check bottom cell
-        else if(board[x][y-1].state == 2) {count.1 += 1}
-        
-        if(board[x-1][y+1].state == 1) {count.0 += 1} // check lower left cell
-        else if(board[x-1][y+1].state == 2) {count.1 += 1}
-        
-        if(board[x-1][y].state == 1) {count.0 += 1} // check left cell
-        else if(board[x-1][y].state == 2) {count.1 += 1}
-        
-        if(board[x-1][y-1].state == 1) {count.0 += 1} // check upper left cell
-        else if(board[x-1][y-1].state == 2) {count.1 += 1}
-        
-        if(board[x][y-1].state == 1) {count.0 += 1} // check bottom cell
-        else if(board[x][y-1].state == 2) {count.1 += 1}
+        for row in x-1..<x+1 {
+            for col in y-1..<y+1 {
+                if(row >= 0 && row < board.count && col >= 0 && col < board[0].count) {
+                    let neighborCellState = board[row][col].state
+                    if(neighborCellState == 1) {count.0 += 1}
+                    else if(neighborCellState == 2) {count.1 += 1}
+                }
+            }
+        }
         
         print(count)
         

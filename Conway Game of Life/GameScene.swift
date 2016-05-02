@@ -72,7 +72,7 @@ class GameScene: SKScene {
         
         let numRows = 15
         let numCols = 10
-        world = World(widthIn: numCols, heightIn: numRows)
+        world = World(widthIn: numRows, heightIn: numCols)
         gridCoord = Array(count: numRows, repeatedValue: Array(count: numCols, repeatedValue: CGPointMake(0,0)))
 //        gridNodes = Array(count: numRows, repeatedValue: Array(count: numCols, repeatedValue: SKSpriteNode(imageNamed: "dead")))
         
@@ -171,8 +171,8 @@ class GameScene: SKScene {
     override func update(currentTime: CFTimeInterval)
     {
         /* Called before each frame is rendered */
-        let numRows = world.height
-        let numCols = world.width
+        let numRows = world.width
+        let numCols = world.height
         
         let bounds = UIScreen.mainScreen().bounds
         let widthScreen = bounds.size.width
@@ -205,7 +205,7 @@ class GameScene: SKScene {
                 let cell = world.board[row][col].sprite
                 
                 if cell.parent != nil{
-                    print("removed gridNode from parent")
+//                    print("removed gridNode from parent")
                     cell.removeFromParent()
 
                 }
@@ -217,5 +217,7 @@ class GameScene: SKScene {
 
             }
         }
+        world.nextGeneration()
+        world.printBoard()
     }
 }
