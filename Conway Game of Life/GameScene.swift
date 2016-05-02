@@ -68,13 +68,12 @@ class GameScene: SKScene {
 //    }
     
     override func didMoveToView(view: SKView) {
-//        /* Setup your scene here */
+        /* Setup your scene here */
         
         let numRows = 15
         let numCols = 10
         world = World(widthIn: numCols, heightIn: numRows)
         gridCoord = Array(count: numRows, repeatedValue: Array(count: numCols, repeatedValue: CGPointMake(0,0)))
-//        gridNodes = Array(count: numRows, repeatedValue: Array(count: numCols, repeatedValue: SKSpriteNode(imageNamed: "dead")))
         
         let bounds = UIScreen.mainScreen().bounds
         let widthScreen = bounds.size.width
@@ -110,15 +109,12 @@ class GameScene: SKScene {
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
        /* Called when a touch begins */
         
-//        print("size: \(touches.count)")
         var col = 0
         var row = 0
         for touch in touches {
 
-            print("touched")
             let location = touch.locationInNode(self)
             
-            print("location.x: \(location.x)")
             if (location.x - margin) / (cellSize + spaceBetwCells) < 0
             {
                 col = -1
@@ -134,9 +130,7 @@ class GameScene: SKScene {
             else {
                 row = Int((abs(location.y) - upperSpace) / (cellSize + spaceBetwCells))
             }
-            
-            print("col: \(col)")
-        
+                    
             if (col >= 0 && row >= 0 &&
                 col < world.board[0].count && row < world.board.count)
             {
@@ -174,47 +168,16 @@ class GameScene: SKScene {
         let numRows = world.height
         let numCols = world.width
         
-        let bounds = UIScreen.mainScreen().bounds
-        let widthScreen = bounds.size.width
-        
-        let gridWidth: CGFloat = widthScreen - margin*2
-        cellSize = (gridWidth - CGFloat(numCols-1)*spaceBetwCells) * 1.0 / CGFloat(numCols)
-        
-        
         for row in 0...numRows-1 {
             for col in 0...numCols-1 {
-//                print("row and col \(row)" + ", \(col)")
-                
-//                print("gridNode point \(cell.position)")
-                
-//                let leftCornerCell = margin + CGFloat(col) * (cellSize + spaceBetwCells)
-//                let upperCornerCell = upperSpace + CGFloat(row) * (cellSize + spaceBetwCells)
-//                gridCoord[row][col] = CGPointMake(leftCornerCell, -upperCornerCell)
-//
-//                var cell = SKSpriteNode()
-//                if world.board[row][col].state == DEAD {
-//                    cell = SKSpriteNode(imageNamed: "dead")
-//                }
-//                else if world.board[row][col].state == P1 {
-//                    cell = SKSpriteNode(imageNamed: "player 1")
-//                }
-//                cell.size = CGSize(width: cellSize, height: cellSize)
-//                cell.position = CGPointMake(leftCornerCell, -upperCornerCell)
-//                cell.anchorPoint = CGPoint(x: 0, y: 1.0)
-//
+
                 let cell = world.board[row][col].sprite
                 
-                if cell.parent != nil{
-                    print("removed gridNode from parent")
+                if cell.parent != nil {
                     cell.removeFromParent()
 
                 }
-//                if cell.parent == nil
-//                {
-                    addChild(cell)
-//                    print("added child")
-//                }
-
+                addChild(cell)
             }
         }
     }
