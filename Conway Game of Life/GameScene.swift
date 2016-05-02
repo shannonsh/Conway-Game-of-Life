@@ -19,7 +19,7 @@ class GameScene: SKScene {
     let spaceBetwCells: CGFloat = 1.4
     var cellSize: CGFloat = 0
     
-    let cellLayer = SKNode()
+//    let cellLayer = SKNode()
     
     required init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -42,43 +42,33 @@ class GameScene: SKScene {
         
     }
     
-    func addSpritesForCells(cells: [[Cell]])
-    {
-        var cellArray = cells
-        for row in 0...cells.count
-        {
-            for col in 0...cells[0].count
-            {
-                var sprite: SKSpriteNode!
-                if world.board[row][col].state == DEAD {
-                    sprite = SKSpriteNode(imageNamed: "dead")
-                }
-                else if world.board[row][col].state == P1 {
-                    sprite = SKSpriteNode(imageNamed: "player 1")
-                }
-
-                let leftCornerCell = margin + CGFloat(col) * (cellSize + spaceBetwCells)
-                let upperCornerCell = upperSpace + CGFloat(row) * (cellSize + spaceBetwCells)
-
-                sprite.position = CGPoint(x: leftCornerCell, y: upperCornerCell)
-                cellLayer.addChild(sprite)
-                cellArray[row][col].sprite = sprite
-            }
-        }
-    }
+//    func addSpritesForCells(cells: [[Cell]])
+//    {
+//        var cellArray = cells
+//        for row in 0...cells.count
+//        {
+//            for col in 0...cells[0].count
+//            {
+//                var sprite: SKSpriteNode!
+//                if world.board[row][col].state == DEAD {
+//                    sprite = SKSpriteNode(imageNamed: "dead")
+//                }
+//                else if world.board[row][col].state == P1 {
+//                    sprite = SKSpriteNode(imageNamed: "player 1")
+//                }
+//
+//                let leftCornerCell = margin + CGFloat(col) * (cellSize + spaceBetwCells)
+//                let upperCornerCell = upperSpace + CGFloat(row) * (cellSize + spaceBetwCells)
+//
+//                sprite.position = CGPoint(x: leftCornerCell, y: upperCornerCell)
+//                cellLayer.addChild(sprite)
+//                cellArray[row][col].sprite = sprite
+//            }
+//        }
+//    }
     
     override func didMoveToView(view: SKView) {
 //        /* Setup your scene here */
-        
-//        let myLabel = SKLabelNode(fontNamed:"Chalkduster")
-//        myLabel.text = "Hello, World!";
-//        myLabel.fontSize = 65;
-//        myLabel.position = CGPoint(x:CGRectGetMidX(self.frame), y:CGRectGetMidY(self.frame));
-//        
-//        self.addChild(myLabel)
-        
-        // initialize the 2d array of tiles
-        
         
         let numRows = 15
         let numCols = 10
@@ -86,6 +76,11 @@ class GameScene: SKScene {
         gridCoord = Array(count: numRows, repeatedValue: Array(count: numCols, repeatedValue: CGPointMake(0,0)))
 //        gridNodes = Array(count: numRows, repeatedValue: Array(count: numCols, repeatedValue: SKSpriteNode(imageNamed: "dead")))
         
+        let bounds = UIScreen.mainScreen().bounds
+        let widthScreen = bounds.size.width
+        
+        let gridWidth: CGFloat = widthScreen - margin*2
+        cellSize = (gridWidth - CGFloat(numCols-1)*spaceBetwCells) * 1.0 / CGFloat(numCols)
         
         for row in 0...numRows-1 {
             for col in 0...numCols-1 {
@@ -105,10 +100,9 @@ class GameScene: SKScene {
                 cell.position = CGPointMake(leftCornerCell, -upperCornerCell)
                 cell.anchorPoint = CGPoint(x: 0, y: 1.0)
                 
-                print("cell position \(cell.position)")
-                
                 world.board[row][col].sprite = cell
-//                addChild(cell)
+
+                addChild(cell)
             }
         }
     }
@@ -154,6 +148,7 @@ class GameScene: SKScene {
                 sprite.size = CGSize(width: cellSize, height: cellSize)
                 sprite.position = pos
                 sprite.anchorPoint = CGPoint(x: 0, y: 1.0)
+                world.board[row][col].sprite = sprite
                 
                 print("gridNode position \(sprite.position)")
                 
@@ -206,16 +201,18 @@ class GameScene: SKScene {
 //                cell.size = CGSize(width: cellSize, height: cellSize)
 //                cell.position = CGPointMake(leftCornerCell, -upperCornerCell)
 //                cell.anchorPoint = CGPoint(x: 0, y: 1.0)
-
+//
                 let cell = world.board[row][col].sprite
                 
                 if cell.parent != nil{
-//                    print("removed gridNode from parent")
+                    print("removed gridNode from parent")
                     cell.removeFromParent()
+
                 }
-//                else
+//                if cell.parent == nil
 //                {
                     addChild(cell)
+//                    print("added child")
 //                }
 
             }

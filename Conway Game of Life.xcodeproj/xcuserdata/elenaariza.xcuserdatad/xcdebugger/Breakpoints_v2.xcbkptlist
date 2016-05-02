@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Conway Game of Life/GameScene.swift"
-            timestampString = "483851271.453764"
+            timestampString = "483904317.088623"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "210"
-            endingLineNumber = "210"
+            startingLineNumber = "205"
+            endingLineNumber = "205"
             landmarkName = "update(_:)"
             landmarkType = "5">
          </BreakpointContent>
