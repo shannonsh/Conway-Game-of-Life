@@ -133,16 +133,19 @@ class GameScene: SKScene {
             if (col >= 0 && row >= 0 &&
                 col < world.board[0].count && row < world.board.count)
             {
-                let pos = world.board[row][col].sprite.position
-                world.board[row][col].sprite.removeFromParent()
+//                let pos = world.board[row][col].sprite.position
+//                world.board[row][col].sprite.removeFromParent()
 
                 var sprite = world.board[row][col].sprite
-                sprite = SKSpriteNode(imageNamed: "player 1")
-                sprite.size = CGSize(width: cellSize, height: cellSize)
-                sprite.position = pos
-                sprite.anchorPoint = CGPoint(x: 0, y: 1.0)
-                world.board[row][col].sprite = sprite
+//                sprite = SKSpriteNode(imageNamed: "player 1")
+//                sprite.size = CGSize(width: cellSize, height: cellSize)
+//                sprite.position = pos
+//                sprite.anchorPoint = CGPoint(x: 0, y: 1.0)
+//                world.board[row][col].sprite = sprite
                 
+//                addChild(sprite)
+                
+                sprite.texture = SKTexture(imageNamed: "player 1")
                 print("gridNode position \(sprite.position)")
                 
 //                if(world.board[row][col].state == P1) {
@@ -164,22 +167,22 @@ class GameScene: SKScene {
    
     override func update(currentTime: CFTimeInterval)
     {
-        /* Called before each frame is rendered */
-        let numRows = world.width
-        let numCols = world.height
-        
-        for row in 0...numRows-1 {
-            for col in 0...numCols-1 {
-
-                let cell = world.board[row][col].sprite
-                
-                if cell.parent != nil {
-                    cell.removeFromParent()
-
-                }
-                addChild(cell)
-            }
-        }
-        world.nextGeneration()
+//        /* Called before each frame is rendered */
+//        let numRows = world.width
+//        let numCols = world.height
+//        
+//        for row in 0...numRows-1 {
+//            for col in 0...numCols-1 {
+//
+//                let cell = world.board[row][col].sprite
+//                
+//                if cell.parent != nil {
+//                    cell.removeFromParent()
+//
+//                }
+//                addChild(cell)
+//            }
+//        }
+//        world.nextGeneration()
     }
 }
