@@ -34,13 +34,6 @@ class World {
         
         board = Array(count: width, repeatedValue: Array(count: height, repeatedValue: Cell(xIn: 0, yIn: 0)));
 
-        
-//        for x in 0...width - 1 {
-//            board.append(arr);
-//            for y in 0...height - 1 {
-//                
-//            }
-//        }
     }
     
     /*
@@ -49,6 +42,7 @@ class World {
     */
     func printBoard() {
         for row in 0...width-1 {
+            
             var rowText = ""
             for col in 0...height-1{
                 let theCell = board[row][col]
@@ -106,6 +100,7 @@ class World {
     */
     func changeState(row: Int, col: Int, newState: Int) {
         board[row][col].updateState(newState)
+        
     }
     
     /* 
@@ -130,7 +125,6 @@ class World {
                 }
             }
         }
-        
         print(count)
         
         return count

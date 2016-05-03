@@ -12,7 +12,6 @@ class GameScene: SKScene {
     
     var world: World!
     var gridCoord = [[CGPointMake(0,0)]]
-//    var gridNodes = [[SKSpriteNode()]]
     
     let margin: CGFloat = 20
     let upperSpace: CGFloat = 100
@@ -156,7 +155,8 @@ class GameScene: SKScene {
             }
 
         }
-        
+        world.printBoard()
+
         
     }
     
@@ -181,6 +181,5 @@ class GameScene: SKScene {
             }
         }
         world.nextGeneration()
-        world.printBoard()
     }
 }
