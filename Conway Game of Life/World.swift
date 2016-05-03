@@ -76,24 +76,24 @@ class World {
     func nextGeneration() {
         for row in 0...width-1 {
             for col in 0...height-1 {
-                var theCell: Cell = board[row][col]
+//                var theCell: Cell = board[row][col]
                 let neighbors = countNeighbors(row, y: col)
                 let totalNeighbors = neighbors.0 + neighbors.1
                 
-                if(theCell.state > 0) {         // conditions for death of live cell
+                if(board[row][col].state > 0) {         // conditions for death of live cell
                     if(totalNeighbors < 2 ||    // if less than 2 or more than 3 neighbors, cell dies
                         totalNeighbors > 3)
                     {
-                        theCell.updateState(DEAD)
+                        board[row][col].updateState(DEAD)
                     }
                 }
                 else {
                     if(totalNeighbors == 3) {   // conditions of revival for dead cell
                         if(neighbors.0 > neighbors.1) { // if exactly 3 neighbors, cell revives
-                            theCell.updateState(P1)
+                            board[row][col].updateState(P1)
                         }
                         else {
-                            theCell.updateState(P2)
+                            board[row][col].updateState(P2)
                         }
                     }
                 }
@@ -121,8 +121,8 @@ class World {
         if(board[x][y].state == 1) {count.0 -= 1}
         else if(board[x][y].state == 2) {count.1 -= 1}
         
-        for row in x-1..<x+1 {
-            for col in y-1..<y+1 {
+        for row in x-1...x+1 {
+            for col in y-1...y+1 {
                 if(row >= 0 && row < board.count && col >= 0 && col < board[0].count) {
                     let neighborCellState = board[row][col].state
                     if(neighborCellState == 1) {count.0 += 1}
