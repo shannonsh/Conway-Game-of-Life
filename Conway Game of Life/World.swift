@@ -131,8 +131,6 @@ class World {
             }
         }
         
-        print(count)
-        
         return count
     }
 }

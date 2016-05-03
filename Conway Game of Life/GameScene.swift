@@ -19,6 +19,8 @@ class GameScene: SKScene {
     let spaceBetwCells: CGFloat = 1.4
     var cellSize: CGFloat = 0
     
+    var isRunning: Bool = false
+    
 //    let cellLayer = SKNode()
     
     required init(coder aDecoder: NSCoder) {
@@ -180,7 +182,10 @@ class GameScene: SKScene {
                 addChild(cell)
             }
         }
-        world.nextGeneration()
+        
+        if(isRunning) {
+            world.nextGeneration()
+        }
         world.printBoard()
     }
 }
