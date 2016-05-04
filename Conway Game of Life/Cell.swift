@@ -15,15 +15,15 @@ let P2 = 2; // cell is owned by player 2
 struct Cell {
     // possible states of the cell
     
-    var xCoord: Int;
-    var yCoord: Int;
+    var xCoord: CGFloat;
+    var yCoord: CGFloat;
     var state: Int;
     var sprite: SKSpriteNode!
     /*
     * x0: initial x location of cell
     * y0: initial y location of cell
     */
-    init(xIn: Int, yIn: Int) {
+    init(xIn: CGFloat, yIn: CGFloat) {
         xCoord = xIn;
         yCoord = yIn;
         state = DEAD;
@@ -46,14 +46,14 @@ struct Cell {
     
     mutating func updateState(newState: Int) {
         state = newState;
-        if(state == 0) {
-            sprite = SKSpriteNode(imageNamed: "dead")
+        if (state == 0) {
+            sprite.texture = SKTexture(imageNamed: "dead")
         }
-        else if(state == 1) {
-            sprite = SKSpriteNode(imageNamed: "player 1")
+        else if (state == 1) {
+            sprite.texture = SKTexture(imageNamed: "player 1")
         }
-        else if(state == 2) {
-            sprite = SKSpriteNode(imageNamed: "player 2")
+        else if (state == 2) {
+            sprite.texture = SKTexture(imageNamed: "player 2")
         }
         else {
             print("ERROR: invalid state for Cell.swift > updateState() function")

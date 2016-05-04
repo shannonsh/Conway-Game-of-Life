@@ -103,7 +103,40 @@ class World {
         
     }
     
-    /* 
+    func gridTouched(gridX: CGFloat, gridY: CGFloat)
+    {
+        var col = 0
+        var row = 0
+        
+        if gridX < 0 {
+            col = -1
+        }
+        else {
+            col = Int(gridX)
+        }
+        
+        if gridY < 0 {
+            row = -1
+        }
+        else {
+            row = Int(gridY)
+        }
+        
+        if (col >= 0 && row >= 0 &&
+            col < board[0].count && row < board.count)
+        {
+            let state = board[row][col].state
+            
+            if (state == P1) {
+                board[row][col].updateState(DEAD)
+            }
+            else {
+                board[row][col].updateState(P1)
+            }
+        }
+    }
+    
+    /*
     * Counts number of cells owned by player 1 and 2 that are neighboring
     * a certain cell and returns result as a tuple
     * x: x coordinate of the cell
