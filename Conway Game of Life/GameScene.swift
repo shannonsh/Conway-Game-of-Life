@@ -19,6 +19,8 @@ class GameScene: SKScene {
     var cellSize: CGFloat = 0
     
     let cellLayer = SKNode()
+    let numP1Label = SKLabelNode()
+    let numP2Label = SKLabelNode()
     
     required init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -44,6 +46,18 @@ class GameScene: SKScene {
         let numCols = 10
         
         addSpritesForCells(numRows, numCols: numCols)
+        
+        numP1Label.text = "hellooooooo"
+        print("\(String(world.numP1Cells))")
+        numP1Label.position = CGPoint(x: 100, y: -100)
+        numP1Label.color = UIColor.blackColor()
+        numP1Label.fontSize = 50
+
+        numP2Label.text = String(world.numP2Cells)
+        
+        addChild(numP1Label)
+        addChild(numP2Label)
+        
         addChild(cellLayer)
     }
     
@@ -72,6 +86,9 @@ class GameScene: SKScene {
                 else if world.board[row][col].state == P1 {
                     cell = SKSpriteNode(imageNamed: "player 1")
                 }
+                else if world.board[row][col].state == P2 {
+                    cell = SKSpriteNode(imageNamed: "player 2")
+                }
                 cell.size = CGSize(width: cellSize, height: cellSize)
                 cell.position = CGPointMake(leftCornerCell, -upperCornerCell)
                 cell.anchorPoint = CGPoint(x: 0, y: 1.0)
@@ -85,6 +102,13 @@ class GameScene: SKScene {
         }
     }
     
+    func updateTopGraphics()
+    {
+        numP1Label.text = String(world.numP1Cells)
+        numP2Label.text = String(world.numP2Cells)
+        
+    }
+    
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
        /* Called when a touch begins */
         
@@ -95,9 +119,14 @@ class GameScene: SKScene {
             let gridX = (location.x - margin) / (cellSize + spaceBetwCells)
             let gridY = (abs(location.y) - upperSpace) / (cellSize + spaceBetwCells)
             
+            
             world.gridTouched(gridX, gridY: gridY)
+            updateTopGraphics()
+            print(location)
+            world.printBoard()
+
         }
-        world.printBoard()
+
     }
     
     

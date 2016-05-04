@@ -9,14 +9,14 @@
 import SpriteKit
 
 class World {
-    var board: [[Cell]];
+    var board: [[Cell]]
  
-    let width: Int;
-    let height: Int;
+    let width: Int
+    let height: Int
  
-    var numP1Cells: Int;
-    var numP2Cells: Int;
- 
+    var numP1Cells: Int
+    var numP2Cells: Int
+    
     required init?(coder aDecoder: NSCoder)
     {
         fatalError("init(coder:) has not been implemented")
@@ -128,10 +128,17 @@ class World {
             let state = board[row][col].state
             
             if (state == P1) {
-                board[row][col].updateState(DEAD)
+                board[row][col].updateState(P2)
+                numP2Cells += 1
+                numP1Cells -= 1
             }
-            else {
+            else if state == DEAD {
                 board[row][col].updateState(P1)
+                numP1Cells += 1
+            }
+            else if state == P2 {
+                board[row][col].updateState(DEAD)
+                numP2Cells -= 1
             }
         }
     }
@@ -158,8 +165,6 @@ class World {
                 }
             }
         }
-        print(count)
-        
         return count
     }
 }
