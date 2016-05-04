@@ -14,7 +14,7 @@ class GameScene: SKScene {
     var gridCoord = [[CGPointMake(0,0)]]
     
     let margin: CGFloat = 20
-    let upperSpace: CGFloat = 100
+    let upperSpace: CGFloat = 150
     let spaceBetwCells: CGFloat = 1.4
     var cellSize: CGFloat = 0
     
@@ -42,21 +42,11 @@ class GameScene: SKScene {
     override func didMoveToView(view: SKView) {
         /* Setup your scene here */
         
-        let numRows = 15
+        let numRows = 14
         let numCols = 10
         
         addSpritesForCells(numRows, numCols: numCols)
-        
-        numP1Label.text = "hellooooooo"
-        print("\(String(world.numP1Cells))")
-        numP1Label.position = CGPoint(x: 100, y: -100)
-        numP1Label.color = UIColor.blackColor()
-        numP1Label.fontSize = 50
-
-        numP2Label.text = String(world.numP2Cells)
-        
-        addChild(numP1Label)
-        addChild(numP2Label)
+        addTopGraphics()
         
         addChild(cellLayer)
     }
@@ -102,6 +92,26 @@ class GameScene: SKScene {
         }
     }
     
+    func addTopGraphics()
+    {
+        numP1Label.text = "0"
+        numP1Label.position = CGPointMake(CGRectGetMidX(frame) - 50, -upperSpace/2)
+        numP1Label.fontColor = SKColor.redColor()
+        numP1Label.fontSize = 50
+        numP1Label.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Right
+        numP1Label.verticalAlignmentMode = SKLabelVerticalAlignmentMode.Center
+        
+        numP2Label.text = "0"
+        numP2Label.position = CGPointMake(CGRectGetMidX(frame) + 50, -upperSpace/2)
+        numP2Label.fontColor = SKColor.blueColor()
+        numP2Label.fontSize = 50
+        numP2Label.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Left
+        numP2Label.verticalAlignmentMode = SKLabelVerticalAlignmentMode.Center
+        
+        addChild(numP1Label)
+        addChild(numP2Label)
+    }
+    
     func updateTopGraphics()
     {
         numP1Label.text = String(world.numP1Cells)
@@ -122,9 +132,7 @@ class GameScene: SKScene {
             
             world.gridTouched(gridX, gridY: gridY)
             updateTopGraphics()
-            print(location)
             world.printBoard()
-
         }
 
     }
