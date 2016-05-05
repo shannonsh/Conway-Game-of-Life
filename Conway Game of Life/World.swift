@@ -165,10 +165,6 @@ class World {
                 }
             }
         }
-<<<<<<< HEAD
-=======
-        
->>>>>>> origin/master
         return count
     }
 }
