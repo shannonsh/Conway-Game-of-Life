@@ -18,9 +18,15 @@ class GameScene: SKScene {
     let spaceBetwCells: CGFloat = 1.4
     var cellSize: CGFloat = 0
     
+<<<<<<< HEAD
     let cellLayer = SKNode()
     let numP1Label = SKLabelNode()
     let numP2Label = SKLabelNode()
+=======
+    var isRunning: Bool = false
+    
+//    let cellLayer = SKNode()
+>>>>>>> origin/master
     
     required init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -142,6 +148,29 @@ class GameScene: SKScene {
     override func update(currentTime: CFTimeInterval)
     {
         /* Called before each frame is rendered */
+<<<<<<< HEAD
 //        world.nextGeneration()
+=======
+        let numRows = world.width
+        let numCols = world.height
+        
+        for row in 0...numRows-1 {
+            for col in 0...numCols-1 {
+
+                let cell = world.board[row][col].sprite
+                
+                if cell.parent != nil {
+                    cell.removeFromParent()
+
+                }
+                addChild(cell)
+            }
+        }
+        
+        if(isRunning) {
+            world.nextGeneration()
+        }
+        world.printBoard()
+>>>>>>> origin/master
     }
 }
