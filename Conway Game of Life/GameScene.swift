@@ -117,6 +117,7 @@ class GameScene: SKScene {
         runButton.strokeColor = SKColor.blackColor()
         runButton.position = CGPoint(x: CGRectGetMidX(frame), y: -upperSpace/2 - 40)
         
+        // feel free to edit my lame graphics and make it awesome
         runButtonText.text = "Run"
         runButtonText.fontColor = SKColor.blackColor()
         runButtonText.fontSize = 20
@@ -148,6 +149,21 @@ class GameScene: SKScene {
             world.gridTouched(gridX, gridY: gridY)
             updateTopGraphics()
             world.printBoard()
+            
+            // Starts running game of life when runButton tapped
+            // iffy stuff starts happening when try to add cells 
+            // while running, so need to disable adding cells while running
+            // I'm too tired to do this right now, but we also need to check if the 
+            // board onscreen actually matches with world.board because I'm seeing different
+            // stuff in console vs on screen            
+            if(runButton.containsPoint(location)) {
+                if(isRunning == false) {
+                    isRunning = true
+                }
+                else {
+                    isRunning = false
+                }
+            }
             
             if(isRunning) {
                 world.nextGeneration()
