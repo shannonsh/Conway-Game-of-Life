@@ -21,7 +21,7 @@ class GameScene: SKScene {
     let cellLayer = SKNode()
     let numP1Label = SKLabelNode()
     let numP2Label = SKLabelNode()
-    let runButton = SKShapeNode(path: CGPathCreateWithRoundedRect(CGRectMake(-15,-15,100,40), 4, 4, nil))
+    let runButton = SKShapeNode(path: CGPathCreateWithRoundedRect(CGRectMake(-25,-20,100,40), 8, 8, nil))
     let runButtonText = SKLabelNode()
 
     var isRunning: Bool = false
@@ -114,14 +114,17 @@ class GameScene: SKScene {
         numP2Label.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Left
         numP2Label.verticalAlignmentMode = SKLabelVerticalAlignmentMode.Center
         
-        runButton.strokeColor = SKColor.blackColor()
-        runButton.position = CGPoint(x: CGRectGetMidX(frame), y: -upperSpace/2 - 40)
         
-        // feel free to edit my lame graphics and make it awesome
+        runButton.fillColor = SKColor.init(hue: 0, saturation: 0, brightness: 0.88, alpha: 1)
+        runButton.position = CGPoint(x: CGRectGetMidX(frame) - runButton.frame.width/4, y: -upperSpace/2 - 40)
+        
+        // feel free to edit my lame graphics and make it awesome. I'm bad with colors.
         runButtonText.text = "Run"
         runButtonText.fontColor = SKColor.blackColor()
-        runButtonText.fontSize = 20
+        runButtonText.fontSize = 25
+        runButtonText.position = CGPoint(x: runButton.frame.width/4, y: 0)
         runButtonText.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Center
+        runButtonText.verticalAlignmentMode = SKLabelVerticalAlignmentMode.Center
         
         runButton.addChild(runButtonText)
         
@@ -155,13 +158,21 @@ class GameScene: SKScene {
             // while running, so need to disable adding cells while running
             // I'm too tired to do this right now, but we also need to check if the 
             // board onscreen actually matches with world.board because I'm seeing different
-            // stuff in console vs on screen            
+            // stuff in console vs on screen
             if(runButton.containsPoint(location)) {
                 if(isRunning == false) {
                     isRunning = true
+//                    [UIView animateWithDuration(1.0, animations:^{
+//                        runButton.fillColor = SKColor.init(hue: 0.33, saturation: 0.25, brightness: 0.9, alpha: 1)
+//                        }];
+                    // ARGH Animations why you no work!!! XP
+                    UIView.animateWithDuration(3.0, animations:{
+                        self.runButton.fillColor = SKColor.init(hue: 0.33, saturation: 0.25, brightness: 0.9, alpha: 1)
+                    })
                 }
                 else {
                     isRunning = false
+                    runButton.fillColor = SKColor.init(hue: 0, saturation: 0, brightness: 0.88, alpha: 1)
                 }
             }
             
