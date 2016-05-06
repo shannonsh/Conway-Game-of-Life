@@ -24,7 +24,8 @@ class GameScene: SKScene {
 
     var isRunning: Bool = false
     
-    required init(coder aDecoder: NSCoder) {
+    required init(coder aDecoder: NSCoder)
+    {
         fatalError("init(coder:) has not been implemented")
     }
     
@@ -41,7 +42,8 @@ class GameScene: SKScene {
     }
     
     
-    override func didMoveToView(view: SKView) {
+    override func didMoveToView(view: SKView)
+    {
         /* Setup your scene here */
         
         let numRows = 14
@@ -126,15 +128,17 @@ class GameScene: SKScene {
         
         for touch in touches {
 
-            // could move code below into World
             let location = touch.locationInNode(self)
             let gridX = (location.x - margin) / (cellSize + spaceBetwCells)
             let gridY = (abs(location.y) - upperSpace) / (cellSize + spaceBetwCells)
             
-            
             world.gridTouched(gridX, gridY: gridY)
             updateTopGraphics()
             world.printBoard()
+            
+            if(isRunning) {
+                world.nextGeneration()
+            }
         }
 
     }
@@ -144,26 +148,6 @@ class GameScene: SKScene {
     override func update(currentTime: CFTimeInterval)
     {
         /* Called before each frame is rendered */
-//        world.nextGeneration()
-        let numRows = world.width
-        let numCols = world.height
-        
-        for row in 0...numRows-1 {
-            for col in 0...numCols-1 {
-
-                let cell = world.board[row][col].sprite
-                
-                if cell.parent != nil {
-                    cell.removeFromParent()
-
-                }
-                addChild(cell)
-            }
-        }
-        
-        if(isRunning) {
-            world.nextGeneration()
-        }
-        world.printBoard()
+        // –> AKA DON'T PUT ANYTHING IN HERE! :P
     }
 }
