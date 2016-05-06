@@ -11,7 +11,6 @@ import SpriteKit
 class GameScene: SKScene {
     
     var world: World!
-    
     var gridCoord = [[CGPointMake(0,0)]]
     
     let margin: CGFloat = 20
