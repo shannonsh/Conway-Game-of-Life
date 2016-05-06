@@ -21,6 +21,8 @@ class GameScene: SKScene {
     let cellLayer = SKNode()
     let numP1Label = SKLabelNode()
     let numP2Label = SKLabelNode()
+    let runButton = SKShapeNode(path: CGPathCreateWithRoundedRect(CGRectMake(-15,-15,100,40), 4, 4, nil))
+    let runButtonText = SKLabelNode()
 
     var isRunning: Bool = false
     
@@ -112,8 +114,19 @@ class GameScene: SKScene {
         numP2Label.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Left
         numP2Label.verticalAlignmentMode = SKLabelVerticalAlignmentMode.Center
         
+        runButton.strokeColor = SKColor.blackColor()
+        runButton.position = CGPoint(x: CGRectGetMidX(frame), y: -upperSpace/2 - 40)
+        
+        runButtonText.text = "Run"
+        runButtonText.fontColor = SKColor.blackColor()
+        runButtonText.fontSize = 20
+        runButtonText.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Center
+        
+        runButton.addChild(runButtonText)
+        
         addChild(numP1Label)
         addChild(numP2Label)
+        addChild(runButton)
     }
     
     func updateTopGraphics()

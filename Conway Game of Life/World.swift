@@ -17,6 +17,8 @@ class World {
     var numP1Cells: Int
     var numP2Cells: Int
     
+    var currentGeneration: Int = 0
+    
     required init?(coder aDecoder: NSCoder)
     {
         fatalError("init(coder:) has not been implemented")
@@ -65,7 +67,7 @@ class World {
     
     //optimization for later: "A cell that did not change at the last time step, and none of whose neighbours changed, is guaranteed not to change at the current time step as well. So, a program that keeps track of which areas are active can save time by not updating the inactive zones." (from Wikipedia) -> Cell needs a last updated variable (units, turns/generations?)
     /*
-    * Determines the state of each cell on the board for the next generation
+    * updates the board for the next generation
     */
     func nextGeneration() {
         for row in 0...width-1 {
@@ -93,6 +95,7 @@ class World {
                 }
             }
         }
+        currentGeneration++
     }
     
     /*
