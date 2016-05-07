@@ -81,21 +81,25 @@ class World {
                         totalNeighbors > 3)
                     {
                         board[row][col].updateState(DEAD)
+                        if(board[row][col].state == 1) {numP1Cells -= 1}
+                        if(board[row][col].state == 2) {numP2Cells -= 1}
                     }
                 }
                 else {
                     if(totalNeighbors == 3) {   // conditions of revival for dead cell
                         if(neighbors.0 > neighbors.1) { // if exactly 3 neighbors, cell revives
                             board[row][col].updateState(P1)
+                            numP1Cells += 1
                         }
                         else {
                             board[row][col].updateState(P2)
+                            numP2Cells += 1
                         }
                     }
                 }
             }
         }
-        currentGeneration++
+        currentGeneration += 1
     }
     
     /*
