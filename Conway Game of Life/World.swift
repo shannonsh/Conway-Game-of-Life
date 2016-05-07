@@ -10,6 +10,7 @@ import SpriteKit
 
 class World {
     var board: [[Cell]]
+    var newBoard: [[Cell]]
  
     let width: Int
     let height: Int
@@ -35,6 +36,7 @@ class World {
         numP2Cells = 0;
         
         board = Array(count: width, repeatedValue: Array(count: height, repeatedValue: Cell(xIn: 0, yIn: 0)));
+        newBoard = board // I'm assuming that Swift will pass this by value and not by reference
 
     }
     
@@ -73,14 +75,14 @@ class World {
         for row in 0...width-1 {
             for col in 0...height-1 {
 //                var theCell: Cell = board[row][col]
-                let neighbors = countNeighbors(row, y: col)
+                let neighbors = countNeighbors(row, y: col) // counts neighbors in board (NOT newBoard)
                 let totalNeighbors = neighbors.0 + neighbors.1
                 
                 if(board[row][col].state > 0) {         // conditions for death of live cell
                     if(totalNeighbors < 2 ||    // if less than 2 or more than 3 neighbors, cell dies
                         totalNeighbors > 3)
                     {
-                        board[row][col].updateState(DEAD)
+                        newBoard[row][col].updateState(DEAD)
                         if(board[row][col].state == 1) {numP1Cells -= 1}
                         if(board[row][col].state == 2) {numP2Cells -= 1}
                     }
@@ -88,11 +90,11 @@ class World {
                 else {
                     if(totalNeighbors == 3) {   // conditions of revival for dead cell
                         if(neighbors.0 > neighbors.1) { // if exactly 3 neighbors, cell revives
-                            board[row][col].updateState(P1)
+                            newBoard[row][col].updateState(P1)
                             numP1Cells += 1
                         }
                         else {
-                            board[row][col].updateState(P2)
+                            newBoard[row][col].updateState(P2)
                             numP2Cells += 1
                         }
                     }
@@ -100,14 +102,7 @@ class World {
             }
         }
         currentGeneration += 1
-    }
-    
-    /*
-    * Changes the state of the cell at the specified location
-    */
-    func changeState(row: Int, col: Int, newState: Int) {
-        board[row][col].updateState(newState)
-        
+        board = newBoard
     }
     
     func gridTouched(gridX: CGFloat, gridY: CGFloat)
