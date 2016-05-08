@@ -16,12 +16,15 @@ class GameScene: SKScene {
     let margin: CGFloat = 20
     let upperSpace: CGFloat = 150
     let spaceBetwCells: CGFloat = 1.4
-    var cellSize: CGFloat = 0
+    var cellSize: CGFloat!
+    
+    var screenMidX: CGFloat!
+    var screenMidY: CGFloat!
     
     let cellLayer = SKNode()
     let numP1Label = SKLabelNode()
     let numP2Label = SKLabelNode()
-    let runButton = SKShapeNode(path: CGPathCreateWithRoundedRect(CGRectMake(-25,-20,100,40), 8, 8, nil))
+    var runButton = SKShapeNode()
     let runButtonText = SKLabelNode()
 
     var isRunning: Bool = false
@@ -35,13 +38,20 @@ class GameScene: SKScene {
     {
         super.init(size: size)
         
+        screenMidX = CGRectGetMidX(frame)
+        screenMidY = CGRectGetMidY(frame)
+
         anchorPoint = CGPoint(x: 0, y: 1.0)
         
         let background = SKSpriteNode(imageNamed: "background")
         background.position = CGPoint(x: 0, y: 0)
         background.anchorPoint = CGPoint(x: 0.0, y: 1.0)
         addChild(background)
+    
+        runButton = SKShapeNode(path: CGPathCreateWithRoundedRect(
+            CGRectMake(screenMidX, -screenMidY,100,40), 8, 8, nil), centered: true)
     }
+    
     
     
     override func didMoveToView(view: SKView)
@@ -102,28 +112,27 @@ class GameScene: SKScene {
     func addTopGraphics()
     {
         numP1Label.text = "0"
-        numP1Label.position = CGPointMake(CGRectGetMidX(frame) - 50, -upperSpace/2)
+        numP1Label.position = CGPointMake(screenMidX - 70, -upperSpace/2)
         numP1Label.fontColor = SKColor.redColor()
         numP1Label.fontSize = 50
         numP1Label.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Right
         numP1Label.verticalAlignmentMode = SKLabelVerticalAlignmentMode.Center
         
         numP2Label.text = "0"
-        numP2Label.position = CGPointMake(CGRectGetMidX(frame) + 50, -upperSpace/2)
+        numP2Label.position = CGPointMake(screenMidX + 70, -upperSpace/2)
         numP2Label.fontColor = SKColor.blueColor()
         numP2Label.fontSize = 50
         numP2Label.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Left
         numP2Label.verticalAlignmentMode = SKLabelVerticalAlignmentMode.Center
         
-        
         runButton.fillColor = SKColor.init(hue: 0, saturation: 0, brightness: 0.88, alpha: 1)
-        runButton.position = CGPoint(x: CGRectGetMidX(frame) - runButton.frame.width/4, y: -upperSpace/2 - 40)
+        runButton.position = CGPoint(x: screenMidX, y: -upperSpace/2)
         
         // feel free to edit my lame graphics and make it awesome. I'm bad with colors.
         runButtonText.text = "Run"
         runButtonText.fontColor = SKColor.blackColor()
         runButtonText.fontSize = 25
-        runButtonText.position = CGPoint(x: runButton.frame.width/4, y: 0)
+        runButtonText.position = CGPoint(x: 0, y: 0)
         runButtonText.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Center
         runButtonText.verticalAlignmentMode = SKLabelVerticalAlignmentMode.Center
         
@@ -150,7 +159,11 @@ class GameScene: SKScene {
             let gridX = (location.x - margin) / (cellSize + spaceBetwCells)
             let gridY = (abs(location.y) - upperSpace) / (cellSize + spaceBetwCells)
             
-            world.gridTouched(gridX, gridY: gridY)
+            if !isRunning
+            {
+                world.gridTouched(gridX, gridY: gridY)
+                
+            }
             updateTopGraphics()
             world.printBoard()
             
