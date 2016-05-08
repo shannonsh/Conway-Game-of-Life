@@ -96,6 +96,7 @@ class GameScene: SKScene {
                 cellLayer.addChild(cell)
             }
         }
+        world.newBoard = world.board
     }
     
     func addTopGraphics()

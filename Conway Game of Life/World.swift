@@ -36,7 +36,7 @@ class World {
         numP2Cells = 0;
         
         board = Array(count: width, repeatedValue: Array(count: height, repeatedValue: Cell(xIn: 0, yIn: 0)));
-        newBoard = Array(count: width, repeatedValue: Array(count: height, repeatedValue: Cell(xIn: 0, yIn: 0)));
+        newBoard = board
 
     }
     
@@ -74,17 +74,22 @@ class World {
     func nextGeneration() {
         for row in 0...width-1 {
             for col in 0...height-1 {
-//                var theCell: Cell = board[row][col]
+
                 let neighbors = countNeighbors(row, y: col) // counts neighbors in board (NOT newBoard)
                 let totalNeighbors = neighbors.0 + neighbors.1
                 
-                if(board[row][col].state > 0) {         // conditions for death of live cell
+                if (board[row][col].state > 0) {         // conditions for death of live cell
                     if(totalNeighbors < 2 ||    // if less than 2 or more than 3 neighbors, cell dies
                         totalNeighbors > 3)
                     {
                         newBoard[row][col].updateState(DEAD)
                         if(board[row][col].state == 1) {numP1Cells -= 1}
                         if(board[row][col].state == 2) {numP2Cells -= 1}
+                    }
+                    else if totalNeighbors == 2 || totalNeighbors == 3
+                    {
+                        let currentState = board[row][col].state
+                        newBoard[row][col].updateState(currentState)
                     }
                 }
                 else {
@@ -158,6 +163,7 @@ class World {
         if(board[x][y].state == 1) {count.0 -= 1}
         else if(board[x][y].state == 2) {count.1 -= 1}
         
+        
         for row in x-1...x+1 {
             for col in y-1...y+1 {
                 if(row >= 0 && row < board.count && col >= 0 && col < board[0].count) {
@@ -167,6 +173,13 @@ class World {
                 }
             }
         }
+        
+        
+        if x == 0
+        {
+            print(count)
+        }
+        
         return count
     }
 }
