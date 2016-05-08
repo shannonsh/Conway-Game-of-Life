@@ -198,10 +198,13 @@ class GameScene: SKScene {
     }
     
     
-   
+   var timer = NSTimer()
     override func update(currentTime: CFTimeInterval)
     {
         /* Called before each frame is rendered */
         // –> AKA DON'T PUT ANYTHING IN HERE! :P
+//        if(isRunning == true) {
+//            var timer = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: Selector(world.nextGeneration()), userInfo: nil, repeats: true)
+//        }
     }
 }
