@@ -36,7 +36,7 @@ class World {
         numP2Cells = 0;
         
         board = Array(count: width, repeatedValue: Array(count: height, repeatedValue: Cell(xIn: 0, yIn: 0)));
-        newBoard = board // I'm assuming that Swift will pass this by value and not by reference
+        newBoard = Array(count: width, repeatedValue: Array(count: height, repeatedValue: Cell(xIn: 0, yIn: 0)));
 
     }
     

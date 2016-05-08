@@ -18,7 +18,7 @@ struct Cell {
     var xCoord: CGFloat;
     var yCoord: CGFloat;
     var state: Int;
-    var sprite: SKSpriteNode!
+    var sprite: SKSpriteNode
     /*
     * x0: initial x location of cell
     * y0: initial y location of cell
@@ -27,6 +27,7 @@ struct Cell {
         xCoord = xIn;
         yCoord = yIn;
         state = DEAD;
+        sprite = SKSpriteNode(imageNamed: "dead") // dead by default
     }
     
     /* updated init that incorporates SKSpriteNode */
