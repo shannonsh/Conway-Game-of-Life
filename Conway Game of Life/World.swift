@@ -174,12 +174,6 @@ class World {
             }
         }
         
-        
-        if x == 0
-        {
-            print(count)
-        }
-        
         return count
     }
 }

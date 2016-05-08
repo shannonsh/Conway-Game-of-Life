@@ -148,7 +148,6 @@ class GameScene: SKScene {
     {
         numP1Label.text = String(world.numP1Cells)
         numP2Label.text = String(world.numP2Cells)
-        
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -160,20 +159,10 @@ class GameScene: SKScene {
             let gridX = (location.x - margin) / (cellSize + spaceBetwCells)
             let gridY = (abs(location.y) - upperSpace) / (cellSize + spaceBetwCells)
             
-            if !isRunning
-            {
-                world.gridTouched(gridX, gridY: gridY)
-                
-            }
-            updateTopGraphics()
-            world.printBoard()
             
             // Starts running game of life when runButton tapped
             // iffy stuff starts happening when try to add cells 
             // while running, so need to disable adding cells while running
-            // I'm too tired to do this right now, but we also need to check if the 
-            // board onscreen actually matches with world.board because I'm seeing different
-            // stuff in console vs on screen
             if(runButton.containsPoint(location)) {
                 if(isRunning == false) {
                     isRunning = true
@@ -192,9 +181,17 @@ class GameScene: SKScene {
                 }
             }
             
-            if(isRunning) {
+            if !isRunning
+            {
+                world.gridTouched(gridX, gridY: gridY)
+            }
+            else {
                 world.nextGeneration()
             }
+            world.printBoard()
+
+            updateTopGraphics()
+
         }
 
     }
