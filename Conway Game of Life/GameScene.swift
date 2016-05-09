@@ -180,15 +180,14 @@ class GameScene: SKScene {
 //                    [UIView animateWithDuration(1.0, animations:^{
 //                        runButton.fillColor = SKColor.init(hue: 0.33, saturation: 0.25, brightness: 0.9, alpha: 1)
 //                        }];
-                    // ARGH Animations why you no work!!! XP
                     runButton.runAction(runButtonAnimation)
-                    runButton.fillColor = SKColor.init(hue: 0.33, saturation: 0.25, brightness: 0.9, alpha: 1)
+                    runButton.fillColor = SKColor.init(hue: 0.33, saturation: 0.25, brightness: 0.9, alpha: 1) // green
                     runButtonText.text = "Pause"
                 }
                 else {
                     isRunning = false
                     runButton.runAction(runButtonAnimation.reversedAction())
-                    runButton.fillColor = SKColor.init(hue: 0, saturation: 0, brightness: 0.88, alpha: 1)
+                    runButton.fillColor = SKColor.init(hue: 0, saturation: 0, brightness: 0.88, alpha: 1) // grey
                     runButtonText.text = "Run"
                 }
             }
@@ -206,8 +205,10 @@ class GameScene: SKScene {
     {
         /* Called before each frame is rendered */
         // –> AKA DON'T PUT ANYTHING IN HERE! :P
+        
+        // trying to make game of life run on its own
 //        if(isRunning == true) {
-//            var timer = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: Selector(world.nextGeneration()), userInfo: nil, repeats: true)
+//            timer = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: Selector(world.nextGeneration()), userInfo: nil, repeats: true)
 //        }
     }
 }
