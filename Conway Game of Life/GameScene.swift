@@ -196,8 +196,9 @@ class GameScene: SKScene {
 
     }
     
-    
-   var timer = NSTimer()
+    var timer = NSTimer()
+
+   
     override func update(currentTime: CFTimeInterval)
     {
         /* Called before each frame is rendered */
