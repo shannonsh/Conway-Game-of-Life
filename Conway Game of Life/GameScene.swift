@@ -196,7 +196,6 @@ class GameScene: SKScene {
 
     }
     
-    var timer = NSTimer()
 
    
     override func update(currentTime: CFTimeInterval)
