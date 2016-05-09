@@ -196,13 +196,11 @@ class GameScene: SKScene {
 
     }
     
-
-   
     override func update(currentTime: CFTimeInterval)
     {
         /* Called before each frame is rendered */
         // –> AKA DON'T PUT ANYTHING IN HERE! :P
-        
+   
         // trying to make game of life run on its own
 //        if(isRunning == true) {
 //            timer = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: Selector(world.nextGeneration()), userInfo: nil, repeats: true)
