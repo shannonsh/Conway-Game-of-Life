@@ -10,7 +10,6 @@ import SpriteKit
 
 class World {
     var board: [[Cell]]
-    var newBoard: [[Cell]]
  
     let width: Int
     let height: Int
@@ -18,6 +17,10 @@ class World {
     var numP1Cells: Int
     var numP2Cells: Int
     
+    var numP1Lives: Int
+    var numP2Lives: Int
+    
+    var mode: Int = 1
     var currentGeneration: Int = 0
     
     required init?(coder aDecoder: NSCoder)
@@ -34,10 +37,10 @@ class World {
         height = heightIn;
         numP1Cells = 0;
         numP2Cells = 0;
+        numP1Lives = 5;
+        numP2Lives = 5;
         
         board = Array(count: width, repeatedValue: Array(count: height, repeatedValue: Cell(xIn: 0, yIn: 0)));
-        newBoard = board
-
     }
     
     /*
@@ -72,6 +75,8 @@ class World {
     * updates the board for the next generation
     */
     func nextGeneration() {
+        var newBoard = board
+
         for row in 0...width-1 {
             for col in 0...height-1 {
 
@@ -110,7 +115,7 @@ class World {
         board = newBoard
     }
     
-    func gridTouched(gridX: CGFloat, gridY: CGFloat)
+    func gridTouched(gridX: CGFloat, gridY: CGFloat, player: Int)
     {
         var col = 0
         var row = 0
@@ -134,18 +139,30 @@ class World {
         {
             let state = board[row][col].state
             
-            if (state == P1) {
-                board[row][col].updateState(P2)
-                numP2Cells += 1
-                numP1Cells -= 1
+            if player == P1 {
+                if (state == P1) {
+                    board[row][col].updateState(DEAD)
+                    numP1Cells -= 1
+                    numP1Lives += 1
+                }
+                else if state == DEAD && numP1Lives > 0 {
+                    board[row][col].updateState(P1)
+                    numP1Cells += 1
+                    numP1Lives -= 1
+                }
             }
-            else if state == DEAD {
-                board[row][col].updateState(P1)
-                numP1Cells += 1
-            }
-            else if state == P2 {
-                board[row][col].updateState(DEAD)
-                numP2Cells -= 1
+            else if player == P2 && numP2Lives > 0 {
+                if state == P2 {
+                    board[row][col].updateState(DEAD)
+                    numP2Cells -= 1
+                    numP2Lives += 1
+                }
+                else if state == DEAD && numP1Lives > 0 {
+                    board[row][col].updateState(P2)
+                    numP2Cells += 1
+                    numP2Lives -= 1
+                }
+
             }
         }
     }
