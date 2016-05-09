@@ -26,6 +26,7 @@ class GameScene: SKScene {
     let numP2Label = SKLabelNode()
     var runButton = SKShapeNode()
     let runButtonText = SKLabelNode()
+    var runButtonAnimation = SKAction.scaleBy(1.1, duration: 0.25)
 
     var isRunning: Bool = false
     
@@ -180,13 +181,15 @@ class GameScene: SKScene {
 //                        runButton.fillColor = SKColor.init(hue: 0.33, saturation: 0.25, brightness: 0.9, alpha: 1)
 //                        }];
                     // ARGH Animations why you no work!!! XP
-                    UIView.animateWithDuration(3.0, animations:{
-                        self.runButton.fillColor = SKColor.init(hue: 0.33, saturation: 0.25, brightness: 0.9, alpha: 1)
-                    })
+                    runButton.runAction(runButtonAnimation)
+                    runButton.fillColor = SKColor.init(hue: 0.33, saturation: 0.25, brightness: 0.9, alpha: 1)
+                    runButtonText.text = "Pause"
                 }
                 else {
                     isRunning = false
+                    runButton.runAction(runButtonAnimation.reversedAction())
                     runButton.fillColor = SKColor.init(hue: 0, saturation: 0, brightness: 0.88, alpha: 1)
+                    runButtonText.text = "Run"
                 }
             }
             
