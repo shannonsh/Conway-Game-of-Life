@@ -64,9 +64,9 @@ class World {
                     rowText += "2"
                 }
             }
-            print(rowText)
+//            print(rowText)
         }
-        print("********************")
+//        print("********************")
     }
     
     

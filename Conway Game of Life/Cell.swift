@@ -57,7 +57,7 @@ struct Cell {
             sprite.texture = SKTexture(imageNamed: "player 2")
         }
         else {
-            print("ERROR: invalid state for Cell.swift > updateState() function")
+//            print("ERROR: invalid state for Cell.swift > updateState() function")
         }
     }
  
