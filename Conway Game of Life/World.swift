@@ -146,21 +146,33 @@ class World {
                     numP1Lives += 1
                 }
                 else if state == DEAD && numP1Lives > 0 {
-                    board[row][col].updateState(P1)
-                    numP1Cells += 1
-                    numP1Lives -= 1
+                    if(numP1Lives > 0) {
+                        board[row][col].updateState(P1)
+                        numP1Cells += 1
+                        numP1Lives -= 1
+                    }
+                    else if(numP1Lives == 0) {
+                        board[row][col].updateState(P1)
+                        numP1Cells += 1
+                    }
                 }
             }
-            else if player == P2 && numP2Lives > 0 {
+            else if player == P2 {
                 if state == P2 {
                     board[row][col].updateState(DEAD)
                     numP2Cells -= 1
                     numP2Lives += 1
                 }
-                else if state == DEAD && numP1Lives > 0 {
-                    board[row][col].updateState(P2)
-                    numP2Cells += 1
-                    numP2Lives -= 1
+                else if state == DEAD && numP2Lives > 0 {
+                    if(numP2Lives > 0) {
+                        board[row][col].updateState(P2)
+                        numP2Cells += 1
+                        numP2Lives -= 1
+                    }
+                    else if(numP2Lives == 0) {
+                        board[row][col].updateState(P2)
+                        numP2Cells += 1
+                    }
                 }
 
             }
