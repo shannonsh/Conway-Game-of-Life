@@ -9,22 +9,30 @@
 import UIKit
 import SpriteKit
 
+
 class GameViewController: UIViewController {
 
-    var scene: GameScene!
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Configure the view.
+        let menuScene = MenuScene(size: view.bounds.size)
+        
         let skView = view as! SKView
-        skView.multipleTouchEnabled = false
-        
-        // Create and configure the scene.
-        scene = GameScene(size: skView.bounds.size)
-        scene.scaleMode = .AspectFill
-        
-        // Present the scene.
-        skView.presentScene(scene)
+//        skView.ignoresSiblingOrder = true
+        menuScene.scaleMode = .AspectFit
+        skView.presentScene(menuScene)
+//        
+//        // Configure the view.
+//        let skView = view as! SKView
+//        skView.multipleTouchEnabled = false
+//        
+//        // Create and configure the scene.
+//        scene = GameScene(size: skView.bounds.size)
+//        scene.scaleMode = .AspectFit
+//        
+//        // Present the scene.
+//        skView.presentScene(scene)
         
     }
     

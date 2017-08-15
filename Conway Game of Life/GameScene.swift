@@ -281,7 +281,6 @@ class GameScene: SKScene {
             
             
             
-            world.printBoard()
 
             updateText()
 

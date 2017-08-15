@@ -14,6 +14,7 @@
 		EEA3459D1C938786007EF118 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EEA3459B1C938786007EF118 /* Main.storyboard */; };
 		EEA3459F1C938786007EF118 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EEA3459E1C938786007EF118 /* Assets.xcassets */; };
 		EEA345A21C938786007EF118 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EEA345A01C938786007EF118 /* LaunchScreen.storyboard */; };
+		FB131BED1F4238F5002DE46B /* MenuScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB131BEC1F4238F5002DE46B /* MenuScene.swift */; };
 		FBBF39701CD2A306009D1311 /* Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBBF396F1CD2A306009D1311 /* Cell.swift */; };
 		FBBF39721CD2A7F9009D1311 /* World.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBBF39711CD2A7F9009D1311 /* World.swift */; };
 /* End PBXBuildFile section */
@@ -28,6 +29,7 @@
 		EEA3459E1C938786007EF118 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EEA345A11C938786007EF118 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EEA345A31C938786007EF118 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FB131BEC1F4238F5002DE46B /* MenuScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuScene.swift; sourceTree = "<group>"; };
 		FBBF396F1CD2A306009D1311 /* Cell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cell.swift; sourceTree = "<group>"; };
 		FBBF39711CD2A7F9009D1311 /* World.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = World.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -68,6 +70,7 @@
 				EEA345991C938786007EF118 /* GameViewController.swift */,
 				EEA3459B1C938786007EF118 /* Main.storyboard */,
 				EEA3459E1C938786007EF118 /* Assets.xcassets */,
+				FB131BEC1F4238F5002DE46B /* MenuScene.swift */,
 				FBBF396F1CD2A306009D1311 /* Cell.swift */,
 				FBBF39711CD2A7F9009D1311 /* World.swift */,
 				EEA345A01C938786007EF118 /* LaunchScreen.storyboard */,
@@ -102,12 +105,13 @@
 		EEA345881C938786007EF118 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0700;
-				ORGANIZATIONNAME = "Elena Ariza and Shannon Shih";
+				LastUpgradeCheck = 0800;
+				ORGANIZATIONNAME = GGDragonStudios;
 				TargetAttributes = {
 					EEA3458F1C938786007EF118 = {
 						CreatedOnToolsVersion = 7.0;
-						DevelopmentTeam = S7GMGY2V3L;
+						DevelopmentTeam = TB72W7WTHC;
+						LastSwiftMigration = 0800;
 					};
 				};
 			};
@@ -151,6 +155,7 @@
 				EEA345981C938786007EF118 /* GameScene.swift in Sources */,
 				FBBF39701CD2A306009D1311 /* Cell.swift in Sources */,
 				EEA3459A1C938786007EF118 /* GameViewController.swift in Sources */,
+				FB131BED1F4238F5002DE46B /* MenuScene.swift in Sources */,
 				EEA345941C938786007EF118 /* AppDelegate.swift in Sources */,
 				FBBF39721CD2A7F9009D1311 /* World.swift in Sources */,
 			);
@@ -191,8 +196,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -236,8 +243,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -256,6 +265,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -272,6 +282,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "elenaariza.Conway-Game-of-Life";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_VERSION = 2.3;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -287,6 +298,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "elenaariza.Conway-Game-of-Life";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_VERSION = 2.3;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

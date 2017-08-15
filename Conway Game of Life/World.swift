@@ -43,36 +43,10 @@ class World {
         board = Array(count: width, repeatedValue: Array(count: height, repeatedValue: Cell(xIn: 0, yIn: 0)));
     }
     
-    /*
-    * For debugging purposes only: prints out entire board in ascii
-    * _ = dead cell, 1 = player 1 cell, 2 = player 2 cell
-    */
-    func printBoard() {
-        for row in 0...width-1 {
-            
-            var rowText = ""
-            for col in 0...height-1{
-                let theCell = board[row][col]
-                
-                if(theCell.state == DEAD) {
-                    rowText += "_"
-                }
-                else if(theCell.state == P1) {
-                    rowText += "1"
-                }
-                else if(theCell.state == P2) {
-                    rowText += "2"
-                }
-            }
-            print(rowText)
-        }
-        print("********************")
-    }
-    
-    
     //optimization for later: "A cell that did not change at the last time step, and none of whose neighbours changed, is guaranteed not to change at the current time step as well. So, a program that keeps track of which areas are active can save time by not updating the inactive zones." (from Wikipedia) -> Cell needs a last updated variable (units, turns/generations?)
     /*
     * updates the board for the next generation
+    * Conway's Game of Life logic implemented here
     */
     func nextGeneration() {
         var newBoard = board
