@@ -40,7 +40,7 @@ class World {
         numP1Lives = 5;
         numP2Lives = 5;
         
-        board = Array(count: width, repeatedValue: Array(count: height, repeatedValue: Cell(xIn: 0, yIn: 0)));
+        board = Array(repeating: Array(repeating: Cell(xIn: 0, yIn: 0), count: height), count: width);
     }
     
     //optimization for later: "A cell that did not change at the last time step, and none of whose neighbours changed, is guaranteed not to change at the current time step as well. So, a program that keeps track of which areas are active can save time by not updating the inactive zones." (from Wikipedia) -> Cell needs a last updated variable (units, turns/generations?)
@@ -159,7 +159,7 @@ class World {
     * x: x coordinate of the cell
     * y: y coordinate of the cell
     */
-    func countNeighbors(x: Int, y: Int) -> (Int, Int) {
+    func countNeighbors(_ x: Int, y: Int) -> (Int, Int) {
         var count = (0,0);
         
         // subtract center cell from total count

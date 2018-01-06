@@ -45,7 +45,7 @@ struct Cell {
 //    } 
     
     
-    mutating func updateState(newState: Int) {
+    mutating func updateState(_ newState: Int) {
         state = newState;
         if (state == 0) {
             sprite.texture = SKTexture(imageNamed: "dead")
