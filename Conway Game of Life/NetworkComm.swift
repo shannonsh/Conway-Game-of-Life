@@ -34,7 +34,7 @@ class NetworkComm: NSObject {
         // Bind read and write socket streams together
         // connect them to the socket of the host (80)
         // last 2 args: pointers to read and write streams to be initialized by the function
-        CFStreamCreatePairWithSocketToHost(kCFAllocatorDefault, "localhost" as CFString, 22000, &readStream, &writeStream)
+        CFStreamCreatePairWithSocketToHost(kCFAllocatorDefault, "10.0.1.19" as CFString, 22000, &readStream, &writeStream)
         
         // store references; prevents memroy leaks
         inputStream = readStream!.takeRetainedValue()
@@ -62,8 +62,8 @@ class NetworkComm: NSObject {
         _ = data.withUnsafeBytes { outputStream.write($0, maxLength: data.count) }
     }
     
-    func sendMessage(message: String) {
-        let data = "mov:\(message)".data(using: .ascii)!
+    func sendMessage(header: String, message: String) {
+        let data = "\(header):\(message)".data(using: .ascii)!
         
         _ = data.withUnsafeBytes { outputStream.write($0, maxLength: data.count) }
     }

@@ -34,6 +34,7 @@ class GameScene: SKScene {
     let livesP1Label = SKLabelNode()
     let livesP2Label = SKLabelNode()
     
+    var theView = SKView();
     let activityInd = UIActivityIndicatorView()
     var myDsg = -1;
     let passNplay = false;
@@ -41,7 +42,8 @@ class GameScene: SKScene {
     var currentMoves = [String]()
     let moveDelimiter = "\n"
     
-    let statusLayer = UIView()
+    let statusView = UIView()
+    var statusText: UILabel? = nil;
     
     required init(coder aDecoder: NSCoder)
     {
@@ -65,23 +67,51 @@ class GameScene: SKScene {
             roundedRect: CGRect(x: screenMidX, y: -screenMidY,width: 100,height: 40), cornerWidth: 8, cornerHeight: 8, transform: nil), centered: true)
     }
     
-    
+    func createStatus(status: String, viewDim: CGRect) {
+        
+        //            var viewRect = CGRect(x: view.bounds.midX, y: view.bounds.midY, width: 100, height: 100)
+        statusView.backgroundColor = UIColor.init(red: 0.94, green: 0.94, blue: 0.94, alpha: 1)
+        statusView.layer.cornerRadius = 5
+        statusView.frame.size.height = 50
+        statusView.frame.size.width = 200
+        statusView.isOpaque = false
+        statusView.center = CGPoint(x: viewDim.width/2, y: viewDim.height/2)
+        
+        let padding = statusView.frame.width * CGFloat(0.1)
+        activityInd.center = CGPoint(x: padding, y: statusView.frame.height/2)
+        activityInd.color = UIColor.black
+        activityInd.hidesWhenStopped = true
+        activityInd.startAnimating()
+        statusView.addSubview(activityInd)
+        scene!.view?.addSubview(statusView)
+        
+        statusText = UILabel(frame: CGRect(x: 0, y: 0, width: statusView.frame.width, height: statusView.frame.height))
+        statusText?.center = CGPoint(x: (statusText?.frame.width)!/2 + padding, y: statusView.frame.height/2)
+        statusText?.textAlignment = .center
+        statusText?.text = "Finding opponent"
+        statusView.addSubview(statusText!)
+    }
+    func showStatus(message: String) {
+        statusText?.text = message
+        activityInd.startAnimating()
+        statusView.isHidden = false
+    }
+    func hideStatus() {
+        activityInd.stopAnimating() // hide activity indicator
+        statusView.isHidden = true
+    }
     
     override func didMove(to view: SKView)
     {
         /* Setup your scene here */
-        
+        theView = view
         let numRows = 16
         let numCols = 12
         
         /* If playing online, issues join request to server (server response handled elsewhere) */
         if (!passNplay) {
             // display activity indicator while waiting for designation assignment from server
-            activityInd.center = CGPoint(x: view.bounds.midX, y: view.bounds.midY)
-            activityInd.color = UIColor.black
-            activityInd.hidesWhenStopped = true
-            activityInd.startAnimating()
-            scene!.view?.addSubview(activityInd)
+            createStatus(status: "Finding opponent", viewDim: view.frame)
             
             netComm.delegate = self
             netComm.setupNetworkCommunication()
@@ -99,11 +129,12 @@ class GameScene: SKScene {
         print("message received: \(message.message)")
         switch message.header {
         case "dsg":  // dsg = designation
-            myDsg = (message.message as NSString).integerValue
+            // server designation is 0-indexed; locally it's 1-indexed. Sorry; will fix when have time
+            print("received num: \((message.message as NSString).integerValue)")
+            myDsg = (message.message as NSString).integerValue + 1
             print("Designation: \(myDsg)")
             
-            activityInd.stopAnimating() // hide activity indicator
-            
+            hideStatus()
         case "mov":
             if world.mode == myDsg {
                 print("Error: message received when not supposed to. Gotta deal with it somehow")
@@ -240,10 +271,15 @@ class GameScene: SKScene {
     func nextTurn() {
         print("mode: \(world.mode) dsg: \(myDsg) num moves: \(currentMoves.count)")
         if (world.mode == myDsg) {
+            print("waiting for opponent")
+            showStatus(message: "Waiting for opponent")
             let message = currentMoves.map({ String(describing: $0) }).joined(separator: moveDelimiter)
-            netComm.sendMessage(message: message)
+            netComm.sendMessage(header: "mov", message: message)
             currentMoves.removeAll()
+        } else {
+            hideStatus()
         }
+        
         if world.mode == 1 {
             // PLAYER 1'S TURN > PLAYER 2'S TURN
             world.mode += 1
@@ -262,7 +298,6 @@ class GameScene: SKScene {
             
             modeText.text = "Player 1"
             modeText.fontColor = SKColor.red
-            
         }
     }
     
