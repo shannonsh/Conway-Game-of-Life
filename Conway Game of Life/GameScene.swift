@@ -37,7 +37,7 @@ class GameScene: SKScene {
     var theView = SKView();
     let activityInd = UIActivityIndicatorView()
     var myDsg = -1;
-    let passNplay = false;
+    let passNplay = true; // change game mode here
     let netComm = NetworkComm()
     var currentMoves = [String]()
     let moveDelimiter = "\n"
@@ -269,15 +269,17 @@ class GameScene: SKScene {
     }
     
     func nextTurn() {
-        print("mode: \(world.mode) dsg: \(myDsg) num moves: \(currentMoves.count)")
-        if (world.mode == myDsg) {
-            print("waiting for opponent")
-            showStatus(message: "Waiting for opponent")
-            let message = currentMoves.map({ String(describing: $0) }).joined(separator: moveDelimiter)
-            netComm.sendMessage(header: "mov", message: message)
-            currentMoves.removeAll()
-        } else {
-            hideStatus()
+        if (!passNplay) {
+            print("mode: \(world.mode) dsg: \(myDsg) num moves: \(currentMoves.count)")
+            if (world.mode == myDsg) {
+                print("waiting for opponent")
+                showStatus(message: "Waiting for opponent")
+                let message = currentMoves.map({ String(describing: $0) }).joined(separator: moveDelimiter)
+                netComm.sendMessage(header: "mov", message: message)
+                currentMoves.removeAll()
+            } else {
+                hideStatus()
+            }
         }
         
         if world.mode == 1 {
@@ -311,7 +313,7 @@ class GameScene: SKScene {
             let gridY = (abs(location.y) - upperSpace) / (cellSize + spaceBetwCells)
             
             
-            if runButton.contains(location) && world.mode == myDsg {
+            if runButton.contains(location) && ((passNplay) || (!passNplay) && world.mode == myDsg) {
                 nextTurn()
                 
                 if (world.numP1Cells == 0 && world.currentGeneration > 0)
@@ -322,7 +324,7 @@ class GameScene: SKScene {
                 
                 
             }
-            else if world.mode == myDsg {
+            else if ((passNplay) || (!passNplay) && world.mode == myDsg) {
                 world.gridTouched(gridX: gridX, gridY: gridY, player: world.mode)
                 currentMoves.append("\(gridX),\(gridY)")
                 print("recorded move")
