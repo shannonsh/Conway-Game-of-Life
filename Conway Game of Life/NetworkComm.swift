@@ -34,7 +34,7 @@ class NetworkComm: NSObject {
         // Bind read and write socket streams together
         // connect them to the socket of the host (80)
         // last 2 args: pointers to read and write streams to be initialized by the function
-        CFStreamCreatePairWithSocketToHost(kCFAllocatorDefault, "10.0.1.19" as CFString, 22000, &readStream, &writeStream)
+        CFStreamCreatePairWithSocketToHost(kCFAllocatorDefault, "127.0.0.1" as CFString, 22000, &readStream, &writeStream)
         
         // store references; prevents memroy leaks
         inputStream = readStream!.takeRetainedValue()

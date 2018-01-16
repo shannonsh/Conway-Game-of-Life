@@ -37,7 +37,7 @@ class GameScene: SKScene {
     var theView = SKView();
     let activityInd = UIActivityIndicatorView()
     var myDsg = -1;
-    let passNplay = true; // change game mode here
+    let passNplay = false; // change game mode here
     let netComm = NetworkComm()
     var currentMoves = [String]()
     let moveDelimiter = "\n"
@@ -135,9 +135,12 @@ class GameScene: SKScene {
             print("Designation: \(myDsg)")
             
             hideStatus()
+            if (myDsg != world.mode) {
+                showStatus(message: "Waiting for opponent")
+            }
         case "mov":
             if world.mode == myDsg {
-                print("Error: message received when not supposed to. Gotta deal with it somehow")
+                print("Error: message received when not supposed to.")
                 break
             }
             // update board with opponent's moves
@@ -339,6 +342,9 @@ class GameScene: SKScene {
     func displayGameOverScreen()
     {
         removeAllChildren()
+        if (!passNplay) {
+            hideStatus()
+        }
         addChild(backgroundNode)
         let gameOverLabel = SKLabelNode(text: "GAME OVER!")
         gameOverLabel.fontColor = SKColor.black
