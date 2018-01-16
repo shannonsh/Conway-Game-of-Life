@@ -1,3 +1,37 @@
+/*
+* This server aims to service multiple games of varying numbers of players at the 
+* same time. Moves by any player in the game are broadcast to all players in the game.
+* 
+* How the server works
+* - Uses TCP protocol
+* - Creates a thread (ac_thread) to listen for and accept new 
+*   connections from clients. Writes client fds to shared
+*   shared array sockfds
+* - Main thread delegates player roles, manages game status, and replies
+*   to clients
+* 
+* Communication protocol:
+* 	Message format: [header (3 characters)]:[content of message]
+* 	  Example: dsg:0
+*     TODO: include sender and recipient of message for games with > 2 players
+*   Headers:
+* 	  dsg (server only) - assigns role of player
+*       Example: dsg:0
+* 	  iam (client only) - sets the identity of the player. Server currently does not do 
+*       anything with this information
+* 		Example: iam:John
+* 	  mov - contains move of other player; broadcasted to all other players in the 
+* 		game. Format of content is dependent on game.
+* 		Example: mov:5.5650313322478, 8.8272921108742
+					5.5650313322478, 7.54797441364606
+					5.52238740900686, 5.863539445629
+					5.52238740900686, 6.33262260127932
+*	  cmd - a generic signal to all clients
+* 		Example: cmd:1 signals to all clients to start the game
+*     err - generic error, message contained in content of packet
+*		Example: err:There are too many games in progress. Please try again later
+* 
+*/
 #include <stdlib.h>
 #include <sys/types.h>
 #include <sys/socket.h>
@@ -17,8 +51,14 @@
 #define MSG_SIZE 1024
 #define HEADER_SIZE 3
 
-#define MAX_PLAYERS 2
+#define MAX_PLAYERS 2 // max number of players per game
 
+/*
+* waiting: players have joined the game but there are not enough players to start playing
+* started: game is started and in progress
+* done: game has concluded
+* errored: player has disconnected in the middle of the game, other unforeseen errors
+*/
 enum statustype { waiting, started, done, errored };
 enum msgtype { id, mov, bad }; // types of messages received from client
 
@@ -290,6 +330,7 @@ void terminate_server() {
 
 int main()
 {
+	// Ctrl-C behavior
 	struct sigaction sa;
     memset( &sa, 0, sizeof(sa) );
     sa.sa_handler = terminate_server;
@@ -367,37 +408,7 @@ int main()
 	*/
 
 
-	/*
-	// accept a connection from any device. If no one is trying to connect, wait
-	// returns a file descriptor to be used for communication
-	// comm_fd = whatever the device sends
-	// writing to comm_fd sends stuff to other device
-    comm_fd = accept(listen_fd, (struct sockaddr*) NULL, NULL);
-	*/
 
-	/*
-	// Clears str, read at most 100 bytes into str, 
-	// display what str has, send back str
-	int result;
-    while(1)
-    {
- 
-        bzero( str, 100);
- 
-        result = read(comm_fd,str,100);
- 
-		if (result < 0) {
-			printf("read error\n");
-			result = close(comm_fd);
-			if (result < 0) {
-				printf("error when closing\n");
-			}
-		}
-        printf("Echoing back - %s",str);
- 
-        write(comm_fd, str, strlen(str)+1);
- 
-    }
-	*/
+
 }
 
